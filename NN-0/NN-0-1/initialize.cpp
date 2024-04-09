@@ -38,7 +38,7 @@ class NN_initialize {
     
 
     // call all functions to initialize the empty neural network
-    void ..... // this might not actually work ... unless I return an array?
+  //  void ..... // this might not actually work ... unless I return an array?
 
 
     // could also make a function to create a matrix of weights for one layer ??
@@ -52,13 +52,33 @@ class NN_initialize {
 }
 
 
-
-
-
-
-
-
 int main () {
+  // declare the variables that will store the amounts of neurons that each layer will contain!!!
+  int Input = 1000;
+  int First = 12;
+  int Second = 12;
+  int Output = 10;
+
+
+
+
+  // create each layer using Ptrs!!!!
+  InputLayerPtr = create_InputLayer(Input);
+  FirstLayerPtr = create_FirstLayer(First);
+  SecondLayerPtr = create_SecondLayer(Second);
+  OutputLayerPtr = create_OutputLayer(Output);
+  
+  // create the weights for each layer!!!!
+  
+  // input -> first layer
+  WeightsFirstLayerPtr = create_WeightsOneLayerMatrix(Input, First);
+
+  // first layer -> second layer
+  WeightsSecondLayerPtr = create_WeightsOneLayerMatrix(First, Second);
+
+  // second layer -> output 
+  WeightsOutputLayerPtr = create_WeightsOneLayerMatrix(Second, Output);
+
 
   return 0;
 }
