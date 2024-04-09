@@ -1,3 +1,8 @@
+// include the NN header file 
+#include <NN_initialize.h>
+
+
+// standard libraries for this project
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
