@@ -39,6 +39,16 @@ class NN_initialize {
 
     // call all functions to initialize the empty neural network
     void ..... // this might not actually work ... unless I return an array?
+
+
+    // could also make a function to create a matrix of weights for one layer ??
+    
+
+    std::vector<std::vector<double>>* create_WeightsOneLayerMatrix (int incoming_layer, int current_layer) { // the return type is a pointer to a matrix (a vector full of vector<double>)
+      std::vector<std::vector<double>>* WeightsOneLayerMatrixPtr = new std::vector<std::vector<double>>(current_layer , std::vector<double>(incoming_layer));
+      return WeightsOneLayerMatrixPtr;
+    }
+
 }
 
 
