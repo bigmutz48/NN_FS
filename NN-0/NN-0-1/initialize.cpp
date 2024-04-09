@@ -59,25 +59,28 @@ int main () {
   int Second = 12;
   int Output = 10;
 
+  // create instance of NN_initialize class 
 
+  NN_initialize NN;
+  
 
 
   // create each layer using Ptrs!!!!
-  InputLayerPtr = create_InputLayer(Input);
-  FirstLayerPtr = create_FirstLayer(First);
-  SecondLayerPtr = create_SecondLayer(Second);
-  OutputLayerPtr = create_OutputLayer(Output);
+  InputLayerPtr = NN.create_InputLayer(Input);
+  FirstLayerPtr = NN.create_FirstLayer(First);
+  SecondLayerPtr = NN.create_SecondLayer(Second);
+  OutputLayerPtr = NN.create_OutputLayer(Output);
   
   // create the weights for each layer!!!!
   
   // input -> first layer
-  WeightsFirstLayerPtr = create_WeightsOneLayerMatrix(Input, First);
+  WeightsFirstLayerMatrixPtr = NN.create_WeightsOneLayerMatrix(Input, First);
 
   // first layer -> second layer
-  WeightsSecondLayerPtr = create_WeightsOneLayerMatrix(First, Second);
+  WeightsSecondLayerMatrixPtr = NN.create_WeightsOneLayerMatrix(First, Second);
 
   // second layer -> output 
-  WeightsOutputLayerPtr = create_WeightsOneLayerMatrix(Second, Output);
+  WeightsOutputLayerMatrixPtr = NN.create_WeightsOneLayerMatrix(Second, Output);
 
 
   return 0;
