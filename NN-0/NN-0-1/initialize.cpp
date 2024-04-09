@@ -77,7 +77,13 @@ class NN_initialize {
     }
 
     std::vector<double>* create_BiasesOnelayer(int current_layer, double init_bias){
+      // declare and allocate memory to the bias vector
       std::vector<double>* BiasPtr = new std::vector<double>(current_layer);
+      
+      // set each value to init_bias
+      for (int i =0; i < BiasPtr->size(); ++i){
+        (*BiasPtr)[i] = init_bias;
+      }
       return BiasPtr;
     }
 
