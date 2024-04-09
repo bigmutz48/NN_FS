@@ -63,8 +63,8 @@ class NN_initialize {
 
 
       // run the nested loops to randomize all the values
-      for (int i = 0; i <= num_vectors ; ++i ) {
-        for (int j = 0; i<= vector_size; ++i){
+      for (int i = 0; i < num_vectors ; ++i ) {
+        for (int j = 0; j< vector_size; ++j){
           // to each entry Matrix[i][j] ... assign a random value between -1 and 1
           (*MatrixPtr)[i][j] = static_cast<double>(rand()) / RAND_MAX * 2.0 - 1.0;
         }
