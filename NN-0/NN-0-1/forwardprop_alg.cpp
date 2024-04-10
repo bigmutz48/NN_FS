@@ -46,4 +46,27 @@ double activation_ithNeuron(std::vector<std::vector<double>>* CurrentLayerWeight
                         ReLU_FinalActivation = ReLU(Neuron_RawSum_wBias);
 
                         return ReLU_FinalActivation;
-                      } 
+                      }
+
+void calc_NextLayerActivation(
+    
+    // INPUTS
+    
+    std::vector<std::vector<double>>* CurrentLayerWeightsMatrixPtr,
+    std::vector<double>* PreviousLayerActivationsPtr,
+    std::vector<double>* CurrentLayerBiasesPtr,
+    
+    //OUTPUT - WRITE TO
+
+    // vector to write to .....
+    std::vector<double>* VectorToWriteToPtr,
+    ){
+  
+  for (int i = 0; i < VectorToWriteToPtr->size(); ++i){ // run for each neuron
+   (*VectorToWriteToPtr)[i] =  activation_ithNeuron(CurrentLayerWeightsMatrixPtr,
+                                                    CurrentLayerBiasesPtr,
+                                                    PreviousLayerActivationsPtr,
+                                                    i);
+
+  }
+}
