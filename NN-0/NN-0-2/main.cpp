@@ -44,6 +44,9 @@ class initialize_NN{
     return WeightsMatrixPtr;
 
     }
+    std::vector<std::vector<double>>* create_MatrixWithAllNeurons(){
+
+    }
 
 };
 
@@ -62,7 +65,7 @@ class run_ForwardPropagation{
                                     int CurrentLayerNumberINDEX,
                                     std::vector<std::vector<double>>* WeightsMatrixPtr,
                                     std::vector<double>* BiasVectorPtr,
-                                    
+                                    std::vector<std::vector<double>>* AllNeuronsActivationsMatrixPtr; 
                                     ){
 
    // calculate the activations of each of the current layer neurons 
