@@ -20,7 +20,7 @@ class initialize_NN{
     }
     
 
-    // initialize all layers
+    // initialize all layers (right now 5)
     void init_ALL(){
 
     }
@@ -47,9 +47,9 @@ class run_BackPropagation{
 int main(){
   // assign these values before running the program
   int input;
-  int layerX;
-  int layerY;
-  int layerz;
+  int hidden1;
+  int hidden2;
+  int hidden3;
   int output;
 
 
