@@ -2,26 +2,42 @@
 #include <vector>
 #include <fstream>
 
-
+initialize_NN.createNuersons 
+WriteToFile.createNeurons
 // 1) set up the empty neurons with pointers
 // 2) set up the bias and weight vectors with random values
 class initialize_NN{
   public:
     // create one layer 
-    std::vector<double>* create_HiddenLayer(int qty){
+    std::vector<double>* create_NeursonsOneLayer(int qty_CurrentLayer){
+      std::vector<double>* NeuronLayerPtr = new std::vector<double>(qty_CurrentLayer);
+      return NeuronLayerPtr;
     }
     
-    std::vector<double>* create_BiasesOneLayer(){
-
+    std::vector<double>* create_BiasesOneLayer(int qty_CurrentLayer){
+        std::vector<double>* BiasVectorPtr = new std::vector<double>(qty_CurrentLayer);
+        return BiasVectorPtr;
     }
 
-    std::vector<std::vector<double>>* create_WeightsOneLayer(){
+    std::vector<std::vector<double>>* create_WeightsBetweenTwoLayers(int qty_CurrentLayer, int qty_IncomingLayer){
+      std::vector<std::vector<double>>* WeightsMatrixPtr = new std::vectors<std::vector<double>>(qty_CurrentLayer, std::vector<double>(qty_IncomingLayer));
 
-    }
-    
+      // set each value to be random
+      
+      // seed the random generator first
+      srand(static_cast<unsigned int>(time(nullptr)));
 
-    // initialize all layers (right now 5)
-    void init_ALL(){
+      // go through each weight entry and set it to be random
+      for (int i = 0 ; i < WeightsMatrixPtr->size(); i++){
+        for (int j = 0; j < WeightsMatrixPtr->at(0).size(); j++){ // set each value in WeightsMatrix to be a random 
+                                                                  // number between 0 and 1
+          (*WeightsMatrixPtr)[i][j] = static_cast<double>(rand()) / RAND_MAX * 2.0 - 1.0 ;  // might be better to do this 
+                                                                                            // using % mod function
+        }
+      }
+  
+    // return the Ptr so that the matrix can be found
+    return WeightsMatrixPtr;
 
     }
 
