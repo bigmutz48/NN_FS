@@ -1,0 +1,8 @@
+ok new ideas for this version:
+
+don't need to use pointers for everything - right tool for the job and I don't necessarily need to use them
+
+
+going to let std::vector manage memory
+	-> IMPORTANT: make sure that after the neuron activation matrix, the AllWeightsMatrix, allBiasesMatrix, make sure that these do not fall out of scope while the program is running because that
+	would be a fatal error for our program.
