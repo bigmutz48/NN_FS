@@ -68,7 +68,12 @@ class initialize_NN{
 
     
 
-
+    // now we need to fill each of those neuron layers with weight vectors for their respective neurons
+    for (int i = 0 ; i < AllLayersNeuronVectorsPtr->size() ; i++){
+      for (int j = 0 ; j < AllNeuronsActivationsMatrixPtr->at[i].size() ; i++){
+        
+      }
+    
 
 
 
