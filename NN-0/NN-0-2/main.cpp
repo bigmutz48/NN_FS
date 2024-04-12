@@ -6,13 +6,16 @@
 // 2) set up the bias and weight vectors with random values
 class initialize_NN{
   public:
+
+
+
     // create one layer 
-    std::vector<double>* create_NeursonsOneLayer(int qty_CurrentLayer){
+    std::vector<double>* create_NeuronsOneLayerPtr(int qty_CurrentLayer){
       std::vector<double>* NeuronLayerPtr = new std::vector<double>(qty_CurrentLayer);
       return NeuronLayerPtr;
     }
     
-    std::vector<double>* create_BiasesOneLayer(int qty_CurrentLayer){
+    std::vector<double>* create_BiasesOneLayerPtr(int qty_CurrentLayer){
         std::vector<double>* BiasVectorPtr = new std::vector<double>(qty_CurrentLayer); 
         
          srand(static_cast<unsigned int>(time(nullptr)));// seed the random num generator
@@ -23,7 +26,7 @@ class initialize_NN{
         return BiasVectorPtr;
     }
 
-    std::vector<std::vector<double>>* create_WeightsBetweenTwoLayers(int qty_CurrentLayer, int qty_IncomingLayer){
+    std::vector<std::vector<double>>* create_WeightsBetweenTwoLayersPtr(int qty_CurrentLayer, int qty_IncomingLayer){
       std::vector<std::vector<double>>* WeightsMatrixPtr = new std::vectors<std::vector<double>>(qty_CurrentLayer, std::vector<double>(qty_IncomingLayer));
 
       // set each value to be random
@@ -44,9 +47,36 @@ class initialize_NN{
     return WeightsMatrixPtr;
 
     }
-    std::vector<std::vector<double>>* create_MatrixWithAllNeurons(){
+    
+    
+    std::vector<std::vector<std::vector<double>>>* CREATEALLNEURONSPTR(int qty_InputLayer,
+                                                                       int qty_FirstLayer,
+                                                                       int qty_SecondLayer,
+                                                                       int qty_ThirdLayer,
+                                                                       int qty_OutputLayer
+        
+        ){
+      std::vector<std::vector<std::vector<double>>>* AllLayersNeuronVectorsPtr = new std::vector<std::vector<std::vector<double>>>(5); // make the main vector that 
+                                                                                                                                       // will hold the big vectors for each layer
+    // each layer gets a create layer value
+    AllNeuronsActivationsMatrixPtr[0] = create_NeuronsOneLayer(qty_InputLayer);
+    AllNeuronsActivationsMatrixPtr[1] = create_NeuronsOneLayer(qty_FirstLayer);
+    AllNeuronsActivationsMatrixPtr[2] = create_NeuronsOneLayer(qty_SecondLayer);
+    AllNeuronsActivationsMatrixPtr[3] = create_NeuronsOneLayer(qty_ThirdLayer);
+    AllNeuronsActivationsMatrixPtr[4] = create_NeuronsOneLayer(qty_OutputLayer);
+    // now each space in AllNeuronsActivationsMatrixPtr should contain the NeuronLayerPtr for each layer
+
+    
+
+
+
+
+
+
 
     }
+
+    
 
 };
 
