@@ -49,14 +49,14 @@ class initialize_NN{
     }
     
     
-    std::vector<std::vector<std::vector<double>>>* CREATEALLNEURONSPTR(int qty_InputLayer,
+    std::vector<std::vector<double>>* CREATEALLNEURONSPTR(int qty_InputLayer,
                                                                        int qty_FirstLayer,
                                                                        int qty_SecondLayer,
                                                                        int qty_ThirdLayer,
                                                                        int qty_OutputLayer
         
         ){
-      std::vector<std::vector<std::vector<double>>>* AllLayersNeuronVectorsPtr = new std::vector<std::vector<std::vector<double>>>(5); // make the main vector that 
+      std::vector<std::vector<double>>* AllLayersNeuronVectorsPtr = new std::vector<std::vector<double>>(5); // make the main vector that 
                                                                                                                                        // will hold the big vectors for each layer
     // each layer gets a create layer value
     AllNeuronsActivationsMatrixPtr[0] = create_NeuronsOneLayer(qty_InputLayer);
@@ -67,21 +67,29 @@ class initialize_NN{
     // now each space in AllNeuronsActivationsMatrixPtr should contain the NeuronLayerPtr for each layer
 
     
-
-    // now we need to fill each of those neuron layers with weight vectors for their respective neurons
-    for (int i = 0 ; i < AllLayersNeuronVectorsPtr->size() ; i++){
-      for (int j = 0 ; j < AllNeuronsActivationsMatrixPtr->at[i].size() ; i++){
-        
-      }
-    
-
-
-
-
-
     }
 
+
+
+    std::vector<std::vector<std::vector<double>>>* CREATEALLWEIGHTSPTR (int qty_InputLayer,
+                                                                        int qty_FirstLayer,
+                                                                        int qty_SecondLayer,
+                                                                        int qty_ThirdLayer,
+                                                                        int qty_OutputLayer){
+      // create the first vector that holds the each layer
+      std::vector<std::vector<std::vector<double>>>* AllLayersWeightsMatrixPtr = new std::vector<std::vector<std::vector<double>>>(5);
+
+      // each of index of these vectors must be populated with a vector (representing a layer) that itself contains a vector (the weights for a given neuron)
+      
+      // for the weights between input and first layer 
+      for (int i = 0 ; i < qty_FirstLayer ; i++){
+        for (int j = 0 ; j < qty_InputLayer ; j++){
+
+        }
+      }
+    }
     
+
 
 };
 
