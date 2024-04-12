@@ -36,7 +36,7 @@ class initialize_NN{
 
       // go through each weight entry and set it to be random
       for (int i = 0 ; i < WeightsMatrixPtr->size(); i++){
-        for (int j = 0; j < WeightsMatrixPtr->at(0).size(); j++){ // set each value in WeightsMatrix to be a random 
+        for (int j = 0; j < WeightsMatrixPtr->at(i).size(); j++){ // set each value in WeightsMatrix to be a random 
                                                                   // number between 0 and 1
           (*WeightsMatrixPtr)[i][j] = static_cast<double>(rand()) / RAND_MAX;  // might be better to do this 
                                                                                             // using % mod function
@@ -56,7 +56,7 @@ class initialize_NN{
                                                                        int qty_OutputLayer
         
         ){
-      std::vector<std::vector<std::vector<double>>>* AllLayersNeuronVectorsPtr = new std::vector<std::vector<std::vector<double>>>(5); // make the main vector that 
+      std::vector<std::vector<std::vector<double>>>* AllNeuronsActivationsMatrixPtr = new std::vector<std::vector<std::vector<double>>>(5); // make the main vector that 
                                                                                                                                        // will hold the big vectors for each layer
     // each layer gets a create layer value
     AllNeuronsActivationsMatrixPtr[0] = create_NeuronsOneLayer(qty_InputLayer);
@@ -68,14 +68,10 @@ class initialize_NN{
 
     
 
-    // now we need to fill each of those neuron layers with weight vectors for their respective neurons
-    for (int i = 0 ; i < AllLayersNeuronVectorsPtr->size() ; i++){
-      for (int j = 0 ; j < AllNeuronsActivationsMatrixPtr->at[i].size() ; i++){
         
-      }
     
 
-
+      return AllNeuronsActivationsMatrixPtr;
 
 
 
