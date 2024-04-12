@@ -31,7 +31,7 @@ class initialize_NN{
       for (int i = 0 ; i < WeightsMatrixPtr->size(); i++){
         for (int j = 0; j < WeightsMatrixPtr->at(0).size(); j++){ // set each value in WeightsMatrix to be a random 
                                                                   // number between 0 and 1
-          (*WeightsMatrixPtr)[i][j] = static_cast<double>(rand()) / RAND_MAX * 2.0 - 1.0 ;  // might be better to do this 
+          (*WeightsMatrixPtr)[i][j] = static_cast<double>(rand()) / RAND_MAX;  // might be better to do this 
                                                                                             // using % mod function
         }
       }
