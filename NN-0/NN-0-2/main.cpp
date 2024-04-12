@@ -2,24 +2,31 @@
 #include <vector>
 #include <fstream>
 
-initialize_NN.createNuersons 
-WriteToFile.createNeurons
 // 1) set up the empty neurons with pointers
 // 2) set up the bias and weight vectors with random values
 class initialize_NN{
   public:
+
+
+
     // create one layer 
-    std::vector<double>* create_NeursonsOneLayer(int qty_CurrentLayer){
+    std::vector<double>* create_NeuronsOneLayerPtr(int qty_CurrentLayer){
       std::vector<double>* NeuronLayerPtr = new std::vector<double>(qty_CurrentLayer);
       return NeuronLayerPtr;
     }
     
-    std::vector<double>* create_BiasesOneLayer(int qty_CurrentLayer){
-        std::vector<double>* BiasVectorPtr = new std::vector<double>(qty_CurrentLayer);
+    std::vector<double>* create_BiasesOneLayerPtr(int qty_CurrentLayer){
+        std::vector<double>* BiasVectorPtr = new std::vector<double>(qty_CurrentLayer); 
+        
+         srand(static_cast<unsigned int>(time(nullptr)));// seed the random num generator
+
+        for (int i = 0; i < BiasVectorPtr->size()){ // set each bias to a random value when the system is first created
+          (*BiasVectorPtr)[i] = static_cast<double>(rand()) / RAND_MAX; 
+        }
         return BiasVectorPtr;
     }
 
-    std::vector<std::vector<double>>* create_WeightsBetweenTwoLayers(int qty_CurrentLayer, int qty_IncomingLayer){
+    std::vector<std::vector<double>>* create_WeightsBetweenTwoLayersPtr(int qty_CurrentLayer, int qty_IncomingLayer){
       std::vector<std::vector<double>>* WeightsMatrixPtr = new std::vectors<std::vector<double>>(qty_CurrentLayer, std::vector<double>(qty_IncomingLayer));
 
       // set each value to be random
@@ -40,6 +47,36 @@ class initialize_NN{
     return WeightsMatrixPtr;
 
     }
+    
+    
+    std::vector<std::vector<std::vector<double>>>* CREATEALLNEURONSPTR(int qty_InputLayer,
+                                                                       int qty_FirstLayer,
+                                                                       int qty_SecondLayer,
+                                                                       int qty_ThirdLayer,
+                                                                       int qty_OutputLayer
+        
+        ){
+      std::vector<std::vector<std::vector<double>>>* AllLayersNeuronVectorsPtr = new std::vector<std::vector<std::vector<double>>>(5); // make the main vector that 
+                                                                                                                                       // will hold the big vectors for each layer
+    // each layer gets a create layer value
+    AllNeuronsActivationsMatrixPtr[0] = create_NeuronsOneLayer(qty_InputLayer);
+    AllNeuronsActivationsMatrixPtr[1] = create_NeuronsOneLayer(qty_FirstLayer);
+    AllNeuronsActivationsMatrixPtr[2] = create_NeuronsOneLayer(qty_SecondLayer);
+    AllNeuronsActivationsMatrixPtr[3] = create_NeuronsOneLayer(qty_ThirdLayer);
+    AllNeuronsActivationsMatrixPtr[4] = create_NeuronsOneLayer(qty_OutputLayer);
+    // now each space in AllNeuronsActivationsMatrixPtr should contain the NeuronLayerPtr for each layer
+
+    
+
+
+
+
+
+
+
+    }
+
+    
 
 };
 
@@ -50,7 +87,27 @@ class WriteToFile{
 
 // 1) run forward propagation for given weights, bias, and input neuron activations
 class run_ForwardPropagation{
-  public:
+  public:  
+    double ReLU(double raw_input){
+    return ans;
+    }
+    void write_ActivationsNextLayer(int IncomingLayerINDEX,
+                                    int CurrentLayerNumberINDEX,
+                                    std::vector<std::vector<double>>* WeightsMatrixPtr,
+                                    std::vector<double>* BiasVectorPtr,
+                                    std::vector<std::vector<double>>* AllNeuronsActivationsMatrixPtr; 
+                                    ){
+
+   // calculate the activations of each of the current layer neurons 
+    for (int i = 0 ; i < qty_CurrentLayer ; i++){ // for each nueron in the current layer
+
+      
+    }
+
+
+
+
+    }
 };
 
 
