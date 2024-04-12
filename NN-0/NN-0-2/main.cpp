@@ -28,6 +28,7 @@ class initialize_NN{
 
     std::vector<std::vector<double>>* create_WeightsBetweenTwoLayersPtr(int qty_CurrentLayer, int qty_IncomingLayer){
       std::vector<std::vector<double>>* WeightsMatrixPtr = new std::vectors<std::vector<double>>(qty_CurrentLayer, std::vector<double>(qty_IncomingLayer));
+      }
 
       // set each value to be random
       
@@ -67,17 +68,12 @@ class initialize_NN{
     // now each space in AllNeuronsActivationsMatrixPtr should contain the NeuronLayerPtr for each layer
 
     
-<<<<<<< HEAD
-
-        
     
 
       return AllNeuronsActivationsMatrixPtr;
 
 
 
-=======
->>>>>>> b4b4fa81aba588efeb8acb346d45ca143aff7d8c
     }
 
 
