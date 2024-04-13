@@ -139,8 +139,12 @@ class run_ForwardPropagation{
     }
     void calculateandwrite_NextLayerActivations( 
                                                  const int index_CurrentLayer,
+
+                                                 // make sure to pass by reference to these two when calling the function
                                                  const std::vector<std::vector<std::vector<double>>>& WeightMatrixVector,
                                                  const std::vector<std::vector<double>>& BiasesMatrix,
+
+                                                 // make sure to pass in a memory address to this guy
                                                  std::vector<std::vector<double>>* NeuronLayersActivationsMatrixPtr){
       for (int i = 0 ; i < NeuronLayersActivationsMatrixPtr->at(index_CurrentLayer).size() ; i++){ // run for the amount of neurons that are in this layer
         // main loop to write to current layer's neuron activations
@@ -168,9 +172,20 @@ class run_ForwardPropagation{
 
 class run_BackPropagation{
   public:
+    double CostFunction(){
+
+    }
+    double calculate_AverageCost(){
+
+    }
 };
 
 class WriteToFile{
+  public:
+};
+
+
+class ImageToComputerVision{
   public:
 };
 
