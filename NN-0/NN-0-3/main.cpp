@@ -116,6 +116,10 @@ class initialize_NN{
 
 class run_ForwardPropagation{
   public:
+    void calculateandwrite_NextLayerActivations( int qty_IncomingLayer,
+                                            int qty_CurrentLayer,
+                                            ){
+    }
 };
 
 
