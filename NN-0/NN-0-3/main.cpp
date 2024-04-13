@@ -116,9 +116,51 @@ class initialize_NN{
 
 class run_ForwardPropagation{
   public:
-    void calculateandwrite_NextLayerActivations( int qty_IncomingLayer,
-                                            int qty_CurrentLayer,
-                                            ){
+    double ReLU(double raw_input){
+      if (raw_input < 0){
+        val = 0;
+      } else {
+        val = raw_input;
+      }
+      return val;
+    }
+    double DotProduct(std::vector<double> vec1, std::vector<double> vec2){
+      // return error if vectors not same size
+      if (vec1.size() != vec2.size()){
+        std::cerr << "Vectors not the same size for DotProduct function";
+        return 0;
+      }
+
+      for (int i = 0 ; i < vec1.size() ; i++){
+        val += vec1[i] * vec2[i];
+      }
+
+      return val;
+    }
+    void calculateandwrite_NextLayerActivations( 
+                                                 int index_CurrentLayer,
+                                                 std::vector<std::vector<std::vector<double>>> WeightMatrixVector,
+                                                 std::vector<std::vector<double>> BiasesMatrix,
+                                                 std::vector<std::vector<double>> NeuronLayersActivationsMatrix){
+      for (int i = 0 ; i < NeuronLayersMatrix[index_CurrentLayer].size() ; i++){ // run for the amount of neurons that are in this layer
+        // main loop to write to current layer's neuron activations
+        
+
+        // take the dot product between the weights vector of the current neuron in our layer
+        // and the vector of the neuron activations from the previous layer
+        double OneNeuronRaw = DotProduct(WeightMatrixVector[index_CurrentLayer][i], NeuronLayersActivationsMatrix[index_CurrentLayer - 1]);
+        
+        // add the bias to the raw output 
+        double RawWithBias = OneNeuronRaw + BiasesMatrix[index_CurrentLayer][i];
+
+        double ValueToWrite = ReLU(RawWithBias); // put the final output through ReLU
+        
+        // now actually write this value to the main vector
+        // NeuronLayersActivationsMatrix[index_CurrentLayer][i]
+        // access the current layer, and the Ith neuron in that layer's vector
+        }
+
+
     }
 };
 
