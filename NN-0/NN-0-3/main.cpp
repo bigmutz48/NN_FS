@@ -116,21 +116,21 @@ class initialize_NN{
 
 class run_ForwardPropagation{
   public:
-    double ReLU(double raw_input){
+    double ReLU(const double raw_input){
       if (raw_input < 0){
-        val = 0;
+        return 0;
       } else {
-        val = raw_input;
+        return raw_input;
       }
       return val;
     }
-    double DotProduct(std::vector<double> vec1, std::vector<double> vec2){
+    double DotProduct(const std::vector<double> vec1,const std::vector<double> vec2){
       // return error if vectors not same size
       if (vec1.size() != vec2.size()){
         std::cerr << "Vectors not the same size for DotProduct function";
         return 0;
       }
-
+        double val = 0;
       for (int i = 0 ; i < vec1.size() ; i++){
         val += vec1[i] * vec2[i];
       }
@@ -138,17 +138,17 @@ class run_ForwardPropagation{
       return val;
     }
     void calculateandwrite_NextLayerActivations( 
-                                                 int index_CurrentLayer,
-                                                 std::vector<std::vector<std::vector<double>>> WeightMatrixVector,
-                                                 std::vector<std::vector<double>> BiasesMatrix,
-                                                 std::vector<std::vector<double>> NeuronLayersActivationsMatrix){
-      for (int i = 0 ; i < NeuronLayersMatrix[index_CurrentLayer].size() ; i++){ // run for the amount of neurons that are in this layer
+                                                 const int index_CurrentLayer,
+                                                 const std::vector<std::vector<std::vector<double>>>& WeightMatrixVector,
+                                                 const std::vector<std::vector<double>>& BiasesMatrix,
+                                                 std::vector<std::vector<double>>* NeuronLayersActivationsMatrixPtr){
+      for (int i = 0 ; i < NeuronLayersActivationsMatrixPtr->at(index_CurrentLayer).size() ; i++){ // run for the amount of neurons that are in this layer
         // main loop to write to current layer's neuron activations
         
 
         // take the dot product between the weights vector of the current neuron in our layer
         // and the vector of the neuron activations from the previous layer
-        double OneNeuronRaw = DotProduct(WeightMatrixVector[index_CurrentLayer][i], NeuronLayersActivationsMatrix[index_CurrentLayer - 1]);
+        double OneNeuronRaw = DotProduct(WeightMatrixVector[index_CurrentLayer][i], NeuronLayersActivationsMatrixPtr[index_CurrentLayer - 1]);
         
         // add the bias to the raw output 
         double RawWithBias = OneNeuronRaw + BiasesMatrix[index_CurrentLayer][i];
@@ -158,6 +158,7 @@ class run_ForwardPropagation{
         // now actually write this value to the main vector
         // NeuronLayersActivationsMatrix[index_CurrentLayer][i]
         // access the current layer, and the Ith neuron in that layer's vector
+        (*NeuronLayersActivationsMatrixPtr)[index_CurrentLayer][i] = ValueToWrite; // I think I did this right???
         }
 
 
@@ -189,13 +190,13 @@ int main(){
 
 
   // initialize the network
-  AllNeuronsMatrix = INIT.create_NeuronLayersMatrix(input, hidden1, hidden2, hidden3, output);
+  auto AllNeuronsMatrix = INIT.create_NeuronLayersMatrix(input, hidden1, hidden2, hidden3, output);
 
   // create weights matrix
-  WeightMatrixVector = INIT.create_VectorAllMatrixWeights(input, hidden1, hidden2, hidden3, output);
+  auto WeightMatrixVector = INIT.create_VectorAllMatrixWeights(input, hidden1, hidden2, hidden3, output);
 
   // create biases matrix
-  BiasesMatrix = INIT.create_BiasesAllLayersMatrix(input, hidden1, hidden2, hidden3, output);
+  auto BiasesMatrix = INIT.create_BiasesAllLayersMatrix(input, hidden1, hidden2, hidden3, output);
 
   return 0;
 }
