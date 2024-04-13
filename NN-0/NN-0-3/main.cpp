@@ -114,7 +114,7 @@ class initialize_NN{
 };
 
 
-class run_ForwardPropagation{
+class NN_ForwardPropagation{
   public:
     double ReLU(const double raw_input){
       if (raw_input < 0){
@@ -169,13 +169,16 @@ class run_ForwardPropagation{
     }
 };
 
-
-class run_BackPropagation{
+// going to use stochastic gradient descent or mini-batch gradient descent
+class NN_Training{
   public:
-    double CostFunction(){
+    double calculate_SGD(){
 
     }
     double calculate_AverageCost(){
+
+    }
+    void calculateandwrite_WeightAndBiasUpdates(){
 
     }
 };
