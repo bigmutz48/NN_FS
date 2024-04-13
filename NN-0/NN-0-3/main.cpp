@@ -128,11 +128,11 @@ class WriteToFile{
 };
 
 int main(){
-  int input;
-  int hidden1;
-  int hidden2;
-  int hidden3;
-  int output;
+  int input = 784;
+  int hidden1 = 12;
+  int hidden2 = 12;
+  int hidden3 = 12;
+  int output = 10;
 
 
 
@@ -142,7 +142,14 @@ int main(){
   run_BackPropagation RUNBACK;
 
 
+  // initialize the network
+  AllNeuronsMatrix = INIT.create_NeuronLayersMatrix(input, hidden1, hidden2, hidden3, output);
 
+  // create weights matrix
+  WeightMatrixVector = INIT.create_VectorAllMatrixWeights(input, hidden1, hidden2, hidden3, output);
+
+  // create biases matrix
+  BiasesMatrix = INIT.create_BiasesAllLayersMatrix(input, hidden1, hidden2, hidden3, output);
 
   return 0;
 }
