@@ -1,0 +1,8 @@
+RULESET FOR VERSION 0 OF NN_FS:
+
+Programming Language:
+- all code to be written in C++
+
+Packages and Packages:
+- only libraries from the standard c++ library can be used on this project
+	-> obviously no packages from tensor flow or torch or anything else ML/AI related
