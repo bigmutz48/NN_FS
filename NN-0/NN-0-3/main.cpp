@@ -116,6 +116,7 @@ class initialize_NN{
 
 class NN_ForwardPropagation{
   public:
+    double Sigmoid_ReLU(){} // do some weird shit here
     double ReLU(const double raw_input){
       if (raw_input < 0){
         return 0;
