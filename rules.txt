@@ -1,2 +1,0 @@
-ORIGINAL RULESET FOR CHALLENGE:
-- no using a NN package

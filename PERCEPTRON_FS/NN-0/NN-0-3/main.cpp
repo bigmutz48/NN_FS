@@ -194,7 +194,9 @@ class ImageToComputerVision{
 };
 
 int main(){
-  int input = 784;
+  int input = 784; // anywhere between 100 and a couple thousand inputs
+                   //   -> might be better to just write a NN that has around 10 or so inputs 
+                   //     for proof of concept
   int hidden1 = 12;
   int hidden2 = 12;
   int hidden3 = 12;
