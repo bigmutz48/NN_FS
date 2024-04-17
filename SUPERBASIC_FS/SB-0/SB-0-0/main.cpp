@@ -80,6 +80,9 @@ class CreateNetwork{
 
 class TrainNetwork{
   public:
+    calculate_RawCostFunction(){
+
+    }
 };
 
 class WriteToFile{
