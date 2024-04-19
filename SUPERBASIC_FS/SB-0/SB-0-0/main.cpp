@@ -75,7 +75,7 @@ class CreateNetwork{
     }
 };
 
-class ForwardPropogation{
+class ForwardAndBackPropogation{
   public:
     
     double ReLU(double input){
@@ -148,23 +148,30 @@ class ForwardPropogation{
                                           WeightsJaggedArray,
                                           BiasesArray); 
 
-
     }
-};
 
 
-class Backpropagation{
-  public:
-    calculate_RawCostFunctionOutPutLayer(
-                                         const std::vector<std::vector<double>>& NeuronMatrix,
-                                         const std::vector<std::vector<double>>& DataSet2X2,
-                                         const int index_DataSet
-                                         ){
-    // look at the last row and calculate cost 
+
     
+    
+    calculate_CurrentCost(
+                          std::vector<std::vector<double>>& NeuronMatrix,
+                          std::vector<std::vector<double>>& Dataset
+                          ){
+      double ans = 0;
 
+      for (int i = 0; i < 2; i++){
+        ans += 0.5 * (NueronMatrix[4][i] - )
+      }
     }
+
+
+
+
 };
+
+
+
 
 class WriteToFile{
   public:
