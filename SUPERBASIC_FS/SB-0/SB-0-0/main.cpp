@@ -102,7 +102,8 @@ class ForwardPropogation{
       }
     }
 
-    calculateANDwrite_NextLayerActivations(int index_IncomingLayer, 
+    void calculateANDwrite_NextLayerActivations(
+                                           int index_IncomingLayer, 
                                            int index_CurrentLayer, 
                                            std::vector<std::vector<double>> & NeuronMatrix,
                                            const std::vector<std::vector<std::vector<double> & WeightsJaggedArray,
@@ -120,14 +121,47 @@ class ForwardPropogation{
 
     }
 
+    calculateANDwrite_AllActivationsAllLayers(      // should take in just the matrices and arrays
+                                           std::vector<std::vector<double>> & NeuronMatrix,
+                                           const std::vector<std::vector<std::vector<double> & WeightsJaggedArray,
+                                           const std::vector<std::vector<double>> & BiasesArray
+                                           ){
+   calculateANDwrite_NextLayerActivations(0,
+                                          1,
+                                          NeuronMatrix,
+                                          WeightsJaggedArray,
+                                          BiasesArray); 
+    
+   calculateANDwrite_NextLayerActivations(1,
+                                          2,
+                                          NeuronMatrix,
+                                          WeightsJaggedArray,
+                                          BiasesArray); 
+   calculateANDwrite_NextLayerActivations(2,
+                                          3,
+                                          NeuronMatrix,
+                                          WeightsJaggedArray,
+                                          BiasesArray); 
+   calculateANDwrite_NextLayerActivations(3,
+                                          4,
+                                          NeuronMatrix,
+                                          WeightsJaggedArray,
+                                          BiasesArray); 
+
 
     }
 };
 
 
-class TrainNetwork{
+class Backpropagation{
   public:
-    calculate_RawCostFunction(){
+    calculate_RawCostFunctionOutPutLayer(
+                                         const std::vector<std::vector<double>>& NeuronMatrix,
+                                         const std::vector<std::vector<double>>& DataSet2X2,
+                                         const int index_DataSet
+                                         ){
+    // look at the last row and calculate cost 
+    
 
     }
 };
