@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 // this program should be a very basic program that functions without really any outside output
-
 
 
 
@@ -75,7 +75,54 @@ class CreateNetwork{
     }
 };
 
+class ForwardPropogation{
+  public:
+    
+    double ReLU(double input){
+      if (input > 0){
+        return input;
+      } else {
+        return 0;
+      }
+    }
 
+    double Sigmoid(double input){
+      return 1.0 / (1.0 + exp(-input));
+    }
+
+    double DotProduct(std::vector<double> & vec1, std::vector<double> & vec2){
+      if (vec1.size() != vec2.size()){
+        std::cerr << "Vectors are not the same size for DotProduct function!";
+        return 0;
+      }else {
+        double sum = 0;
+        for (int i = 0 ; i < vec1.size(); i++){
+          sum += vec1[i] * vec2[i];
+        }
+      }
+    }
+
+    calculateANDwrite_NextLayerActivations(int index_IncomingLayer, 
+                                           int index_CurrentLayer, 
+                                           std::vector<std::vector<double>> & NeuronMatrix,
+                                           const std::vector<std::vector<std::vector<double> & WeightsJaggedArray,
+                                           const std::vector<std::vector<double>> & BiasesArray
+                                           ){
+    
+    // for each neuron
+    for (int i = 0; i < NeuronMatix[index_CurrentLayer].size(); i++){
+
+      double raw_sum = DotProduct(NeuronMatrix[incoming_layer], WeightsJaggedArray[current_layer - 1][i]) + BiasesArray[index_CurrentLayer - 1][i];
+      
+      double activation = Sigmoid(raw_sum);
+
+      NeuronMatrix[current_layer][i] = activation;
+
+    }
+
+
+    }
+};
 
 
 class TrainNetwork{
@@ -96,12 +143,19 @@ int main(){
   WriteToFile WRITE;
   TrainNetwork TRAIN;
 
-
+  // parameters for initializing NN
   int input = 2;
   int first = 10;
   int second = 10;
   int third = 10; 
   int output = 2;
+
+  // parameters for training data
+  double M;
+  double B;
+  int TrainingLength;
+
+
 
 
   // create network
@@ -120,7 +174,10 @@ int main(){
   // create training DATA
 
 
-  
+
+  // m, b , length of data vectors
+  auto TrainingData = TRAIN.create_DataVectorM_X_B(M, B, TrainingLength );
+
 
 
   return 0;
