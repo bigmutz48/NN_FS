@@ -2,15 +2,7 @@
 
 
 
-// define the required structs
 
-struct init_5layersnetwork{ // to make handling network init values easier
-  int Input;
-  int First;
-  int Second;
-  int Third;
-  int Output;
-};
 
 
 

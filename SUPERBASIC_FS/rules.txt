@@ -1,0 +1,3 @@
+RULES FOR THIS PROJECT:
+- can only use C++ or C!
+- no using external ai libraries!
