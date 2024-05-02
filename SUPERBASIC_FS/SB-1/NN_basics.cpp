@@ -1,5 +1,5 @@
 #include <iostream>
-#include "init_NN.hpp"
+#include "NN_basics.hpp"
 #include <fstream>
 #include <vector>
 
@@ -62,6 +62,18 @@ class init_NN {
     WeightsMain[3] = create_WeighsMatrixOneLayer(third, output);
   }
   
+
+
+  std::vector<std::vector<double>> create_Biases(int input, int first, int second, int third, int output){
+    std::vector<std::vector<double> Biases(4);
+    Biases = std::vector<double>(qty_FirstLayer, 1);
+    Biases = std::vector<double>(qty_SecondLayer, 1);
+    Biases = std::vector<double>(qty_ThirdLayer, 1);
+    Biases = std::vector<double>(qty_OutputLayer, 1);
+  
+  return Biases;
+  }
+
 //private
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //public
@@ -85,6 +97,15 @@ class init_NN {
                                                                                    qty_ThirdLayer,
                                                                                    qty_OutputLayer)
     
+    // create biases 
+    std::vector<std::vector<double>> BiasesMain = create_Biases(qty_InputLayer,
+                                                                qty_FirstLayer,
+                                                                qty_SecondLayer,
+                                                                qty_ThirdLayer,
+                                                                qty_OutputLayer)
+
+
+
 
     // create neurons
     std::vector<std::vector<double>> NeuronsMain = create_5LayerNetwork(qty_InputLayer,
