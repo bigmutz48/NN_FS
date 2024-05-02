@@ -30,7 +30,7 @@ class init_NN {
   
 
     // function to create the matrix for one neuron in the current layer
-  std::vector<std::vector<double>> create_MatrixOneNeuron(int incoming, int current){
+  std::vector<std::vector<double>> create_WeighsMatrixOneLayer(int incoming, int current){
   std::vector<std::vector<double>> main(current);
     for (int i = 0 ; i < current ; i++){
     // each spot in main gets an array the size of the incoming layer  
@@ -43,9 +43,23 @@ class init_NN {
 
   }
 
+    // create one set of weights
+
   std::vector<std::vector<std::vector<double>>> create_WeightsMain(int input, int first, int second, int third, int output){
     std::vector<std::vector<std::vector<double>>> WeightsMain(4);
-
+    // fill up the layers
+    
+    // weights matrix between the input and first layer
+    WeightsMain[0] = create_WeighsMatrixOneLayer(input, first);
+    
+    // weights matrix between the input and first layer
+    WeightsMain[1] = create_WeighsMatrixOneLayer(first, second);
+   
+    // weights matrix between the input and first layer
+    WeightsMain[2] = create_WeighsMatrixOneLayer(second, third);
+    
+    // weights matrix between the input and first layer
+    WeightsMain[3] = create_WeighsMatrixOneLayer(third, output);
   }
   
 //private
