@@ -94,13 +94,9 @@ class init_NN {
   return Biases;
   }
 
-//private
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//public
-  public: 
-    // all of these are things that need to be accessed by whoever 
 
-    // parameters to be set
+
+    // parameters to be set when the constructor is called
 
     int qty_InputLayer = 0;
     int qty_FirstLayer = 0;
@@ -108,7 +104,40 @@ class init_NN {
     int qty_ThirdLayer = 0;
     int qty_OutputLayer = 0;
 
+
+//private
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//public
+  public: 
+    // all of these are things that need to be accessed by whoever 
+
+    // constructor for this class 
+    init_NN(int input,
+            int first,
+            int second,
+            int third, 
+            int output){
+      if (input != 0 && first != 0 && second != 0 && third != 0 && output != 0){
+      this->qty_InputLayer = input;
+      this->qty_FirstLayer = first;
+      this->qty_SecondLayer = second;
+      this->qty_ThirdLayer = third; 
+      this->qty_OutputLayer = output;
+      } else {
+        std::cerr << "Your forgot to set a parameter for the init_NN constructor - there are 5....\n"
+                  << "input, first, second, third, output ....\n"
+                  << "Each of these represents the amount of neurons in a respective layer" << std::endl;
+      }
+    }
+
+    // default constructor in case you make some mistake and forget to properly initialize this mf
+    init_NN(){
+      std::cerr << "You cannot use the default constructor for creating an object of this class";
+    }
+
+
     // create the objects to be accessed
+    
     
     // create weights main  
     std::vector<std::vector<std::vector<double>>> WeightsMain = create_WeightsMain(qty_InputLayer,
@@ -134,4 +163,54 @@ class init_NN {
                                                                         qty_ThirdLayer,
                                                                         qty_OutputLayer)   
       
+};
+
+
+class ForwardProp{
+
+  double calculate_ActivationBetweenTwoLayers(){
+
+  }
+
+
+  // items to be set when the constructor is called
+
+  // pointer to the weights
+  std::vector<std::vector<std::vector<double>>>* WeightsPtr = nullptr;
+
+  // pointer to the biases
+  std::vector<std::vector<double>>* BiasesPtr = nullptr;
+
+  // pointer to the neruons array
+  std::vector<std::vector<double>>* NeuronsPtr = nullptr;
+//private
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//public
+  public:
+  // constructor
+  ForwardProp( std::vector<std::vector<std::vector<double>>>* WeightsPtr,
+               std::vector<std::vector<double>>* BiasesPtr,
+               std::vector<std::vector<double>>* NeuronsPtr){
+    this->WeightsPtr = WeightsPtr;
+    this->BiasesPtr = BiasesPtr;
+    this->NeuronsPtr = NeuronsPtr;
+
+  }
+  // if default constructor is used throw an error
+  ForwardProp(){
+    std::cerr << "You cannot use the default constructor for ForwardProp";
+  }
+
+  void run_ForwardProp(){
+      if (BiasesPtr = nullptr){
+        std::cerr << "Must set BiasesPtr" << std::endl;
+      } else if (WeightsPtr = nullptr){
+        std::cerr << "Must set WeightsPtr" << std::endl;
+      } else if (NeuronsPtr = nullptr){
+        std::cerr << "Must set NeuronsPtr" << std::endl;
+      } else {
+        // if none of those get tripped then you want to run the forward prop
+
+      }
+    }
 };
