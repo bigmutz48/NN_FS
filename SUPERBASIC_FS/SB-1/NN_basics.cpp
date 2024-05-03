@@ -2,11 +2,17 @@
 #include "NN_basics.hpp"
 #include <fstream>
 #include <vector>
+#include <random>
 
 // main class for initializing the init_NN
 
 
 class init_NN {
+    // seed a random number generator 
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<> distr(0,5);
+
 
     
     // functions to generate the network and allocate memory for it
@@ -38,6 +44,20 @@ class init_NN {
 
     }
     
+
+    // we want each weight in this layer to be a random value and not 0
+    // should assign a random double between 0 and 5
+      for (int i = 0 ; i < current ; i++){
+        for (int j = 0 ; j < incoming ; j++){
+          int rand = distr(gen);
+          main[i][j] = static_cast<double>(rand);
+        }
+      }  
+
+
+
+
+
     ret main;
 
 
