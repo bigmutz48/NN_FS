@@ -6,10 +6,8 @@
 
 
 
-class math{
-  public:
     //dot product
-    double dot_product(const std::vector<double>& vec1, const std::vector<double>& vec2){
+double math::dot_product(const std::vector<double>& vec1, const std::vector<double>& vec2){
       double sum = 0;
       if (vec1.size() != vec2.size){
         std::cerr << "Vectors not the same size for dot product" << std::endl;
