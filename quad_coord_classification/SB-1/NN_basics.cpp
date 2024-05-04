@@ -24,7 +24,7 @@ double math::dot_product(const std::vector<double>& vec1, const std::vector<doub
     }
 
 
-    double ReLU(double raw_input){
+double math::ReLU(double raw_input){
       if (raw_input < 0){
         return 0.0;
       } else (
@@ -32,8 +32,7 @@ double math::dot_product(const std::vector<double>& vec1, const std::vector<doub
           )
 
     }
-  
-}
+
 
 
 
@@ -42,11 +41,7 @@ double math::dot_product(const std::vector<double>& vec1, const std::vector<doub
 // main class for initializing the init_NN
 
 
-class init_NN {
-    // seed a random number generator 
-  std::random_device rd;
-  std::mt19937 gen(rd());
-  std::uniform_int_distribution<> distr(0,5);
+
 
 
     
@@ -143,11 +138,10 @@ class init_NN {
 //private
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //public
-  public: 
     // all of these are things that need to be accessed by whoever 
 
     // constructor for this class 
-    init_NN(int input,
+init_NN::init_NN(int input,
             int first,
             int second,
             int third, 
@@ -163,26 +157,25 @@ class init_NN {
                   << "input, first, second, third, output ....\n"
                   << "Each of these represents the amount of neurons in a respective layer" << std::endl;
       }
-    }
-
-    // default constructor in case you make some mistake and forget to properly initialize this mf
-    init_NN(){
-      std::cerr << "You cannot use the default constructor for creating an object of this class";
-    }
-
-
-    // create the objects to be accessed
     
+
+      
+    // seed a random number generator 
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<> distr(0,5);
+
+
     
     // create weights main  
-    std::vector<std::vector<std::vector<double>>> WeightsMain = create_WeightsMain(qty_InputLayer,
+    this-> WeightsMain = create_WeightsMain(qty_InputLayer,
                                                                                    qty_FirstLayer, 
                                                                                    qty_SecondLayer,
                                                                                    qty_ThirdLayer,
                                                                                    qty_OutputLayer)
     
     // create biases 
-    std::vector<std::vector<double>> BiasesMain = create_Biases(qty_InputLayer,
+    this-> BiasesMain = create_Biases(qty_InputLayer,
                                                                 qty_FirstLayer,
                                                                 qty_SecondLayer,
                                                                 qty_ThirdLayer,
@@ -192,13 +185,27 @@ class init_NN {
 
 
     // create neurons
-    std::vector<std::vector<double>> NeuronsMain = create_5LayerNetwork(qty_InputLayer,
+    this-> NeuronsMain = create_5LayerNetwork(qty_InputLayer,
                                                                         qty_FirstLayer,
                                                                         qty_SecondLayer,
                                                                         qty_ThirdLayer,
                                                                         qty_OutputLayer)   
-      
-};
+    }
+
+
+
+
+
+
+
+
+
+    // default constructor in case you make some mistake and forget to properly initialize this mf
+    init_NN(){
+      std::cerr << "You cannot use the default constructor for creating an object of this class";
+    }
+
+
 
 
 class ForwardProp{
