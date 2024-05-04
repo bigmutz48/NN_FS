@@ -47,7 +47,7 @@ double math::ReLU(double raw_input){
     
     // functions to generate the network and allocate memory for it
 
-    std::vector<double> create_OneLayer(int size){
+    std::vector<double> init_NN::create_OneLayer(int size){
       return std::vector<double>(size, 0);
     }
 
@@ -66,7 +66,7 @@ double math::ReLU(double raw_input){
   
 
     // function to create the matrix for one neuron in the current layer
-  std::vector<std::vector<double>> create_WeighsMatrixOneLayer(int incoming, int current){
+  std::vector<std::vector<double>> init_NN::create_WeighsMatrixOneLayer(int incoming, int current){
   std::vector<std::vector<double>> main(current);
     for (int i = 0 ; i < current ; i++){
     // each spot in main gets an array the size of the incoming layer  
@@ -95,7 +95,7 @@ double math::ReLU(double raw_input){
 
     // create one set of weights
 
-  std::vector<std::vector<std::vector<double>>> create_WeightsMain(int input, int first, int second, int third, int output){
+  std::vector<std::vector<std::vector<double>>> init_NN::create_WeightsMain(int input, int first, int second, int third, int output){
     std::vector<std::vector<std::vector<double>>> WeightsMain(4);
     // fill up the layers
     
@@ -114,7 +114,7 @@ double math::ReLU(double raw_input){
   
 
 
-  std::vector<std::vector<double>> create_Biases(int input, int first, int second, int third, int output){
+  std::vector<std::vector<double>> init_NN::create_Biases(int input, int first, int second, int third, int output){
     std::vector<std::vector<double> Biases(4);
     Biases = std::vector<double>(qty_FirstLayer, 1);
     Biases = std::vector<double>(qty_SecondLayer, 1);
@@ -128,11 +128,7 @@ double math::ReLU(double raw_input){
 
     // parameters to be set when the constructor is called
 
-    int qty_InputLayer = 0;
-    int qty_FirstLayer = 0;
-    int qty_SecondLayer = 0;
-    int qty_ThirdLayer = 0;
-    int qty_OutputLayer = 0;
+
 
 
 //private
@@ -145,8 +141,22 @@ init_NN::init_NN(int input,
             int first,
             int second,
             int third, 
-            int output){
-      if (input != 0 && first != 0 && second != 0 && third != 0 && output != 0){
+            int output)
+// initalizer list
+  : gen(rd()), distr(0, 5)
+
+
+{
+// do i need to do this? ...
+// seems safe to do this just in case
+    this-> qty_InputLayer = 0;
+    this-> qty_FirstLayer = 0;
+    this-> qty_SecondLayer = 0;
+    this-> qty_ThirdLayer = 0;
+    this-> qty_OutputLayer = 0;
+
+
+  if (input != 0 && first != 0 && second != 0 && third != 0 && output != 0){
       this->qty_InputLayer = input;
       this->qty_FirstLayer = first;
       this->qty_SecondLayer = second;
@@ -201,32 +211,13 @@ init_NN::init_NN(int input,
 
 
     // default constructor in case you make some mistake and forget to properly initialize this mf
-    init_NN(){
+init_NN::init_NN(){
       std::cerr << "You cannot use the default constructor for creating an object of this class";
     }
 
 
 
-
-class ForwardProp{
-
-
-
-
-  // items to be set when the constructor is called
-
-  // pointer to the weights
-  std::vector<std::vector<std::vector<double>>>* WeightsPtr = nullptr;
-
-  // pointer to the biases
-  std::vector<std::vector<double>>* BiasesPtr = nullptr;
-
-  // pointer to the neruons array
-  std::vector<std::vector<double>>* NeuronsPtr = nullptr;
-
-
-
-  void calculateandwrite_ActivationsNextLayer(int index_CurrentLayer){
+  void ForwardProp::calculateandwrite_ActivationsNextLayer(int index_CurrentLayer){
 
     for (int i = 0 ; i < this -> WeightsPtr[index_CurrentLayer].size() ; i++){
      // populate the neuron in the next layer appropritely
@@ -238,9 +229,9 @@ class ForwardProp{
 //private
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //public
-  public:
+
   // constructor
-  ForwardProp( std::vector<std::vector<std::vector<double>>>* WeightsPtr,
+  ForwardProp::ForwardProp( std::vector<std::vector<std::vector<double>>>* WeightsPtr,
                std::vector<std::vector<double>>* BiasesPtr,
                std::vector<std::vector<double>>* NeuronsPtr){
     this->WeightsPtr = WeightsPtr;
@@ -249,16 +240,16 @@ class ForwardProp{
 
   }
   // if default constructor is used throw an error
-  ForwardProp(){
+  ForwardProp::ForwardProp(){
     std::cerr << "You cannot use the default constructor for ForwardProp";
   }
 
-  void run_ForwardProp(){
-      if (BiasesPtr = nullptr){
+  void ForwardProp::run_ForwardProp(){
+      if (BiasesPtr == nullptr){
         std::cerr << "Must set BiasesPtr" << std::endl;
-      } else if (WeightsPtr = nullptr){
+      } else if (WeightsPtr == nullptr){
         std::cerr << "Must set WeightsPtr" << std::endl;
-      } else if (NeuronsPtr = nullptr){
+      } else if (NeuronsPtr == nullptr){
         std::cerr << "Must set NeuronsPtr" << std::endl;
       } else {
         // if none of those get tripped then you want to run the forward prop 
@@ -272,4 +263,3 @@ class ForwardProp{
       }
       std::cout << "run_ForwardProp successful!" << std::endl;
     }
-};
