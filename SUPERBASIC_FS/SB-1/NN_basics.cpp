@@ -4,6 +4,43 @@
 #include <vector>
 #include <random>
 
+
+
+class math{
+  public:
+    //dot product
+    double dot_product(const std::vector<double>& vec1, const std::vector<double>& vec2){
+      double sum = 0;
+      if (vec1.size() != vec2.size){
+        std::cerr << "Vectors not the same size for dot product" << std::endl;
+      } else{
+        for (int i = 0 ; i < vec1.size() ; i++){
+          sum += vec1[i] * vec2[i];
+        }
+
+      }
+
+      // return the value
+      return sum;
+
+    }
+
+
+    double ReLU(double raw_input){
+      if (raw_input < 0){
+        return 0.0;
+      } else (
+          return raw_input;
+          )
+
+    }
+  
+}
+
+
+
+
+
 // main class for initializing the init_NN
 
 
@@ -168,9 +205,7 @@ class init_NN {
 
 class ForwardProp{
 
-  double calculate_ActivationBetweenTwoLayers(){
 
-  }
 
 
   // items to be set when the constructor is called
@@ -183,6 +218,18 @@ class ForwardProp{
 
   // pointer to the neruons array
   std::vector<std::vector<double>>* NeuronsPtr = nullptr;
+
+
+
+  void calculateandwrite_ActivationsNextLayer(int index_CurrentLayer){
+
+    for (int i = 0 ; i < this -> WeightsPtr[index_CurrentLayer].size() ; i++){
+     // populate the neuron in the next layer appropritely
+      this -> NeuronsPtr[i + 1][j] = math::ReLU((math::dot_product(WeightsPtr[i][j], NeuronsPtr[i]));
+    }
+  }
+
+
 //private
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //public
@@ -209,8 +256,15 @@ class ForwardProp{
       } else if (NeuronsPtr = nullptr){
         std::cerr << "Must set NeuronsPtr" << std::endl;
       } else {
-        // if none of those get tripped then you want to run the forward prop
+        // if none of those get tripped then you want to run the forward prop 
+        
 
+        // loop for the remaining layers which remain unfilled ... only 2,3,4,5 remain unfilled  and therefore are the only ones that 
+        // require filling so four loops is sufficient
+        for (int i = 0 ; i < 4 ; i++){
+          calculateandwrite_ActivationsNextLayer(i);
+        }
       }
+      std::cout << "run_ForwardProp successful!" << std::endl;
     }
 };
