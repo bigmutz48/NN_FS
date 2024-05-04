@@ -9,7 +9,7 @@
     //dot product
 double math::dot_product(const std::vector<double>& vec1, const std::vector<double>& vec2){
       double sum = 0;
-      if (vec1.size() != vec2.size){
+      if (vec1.size() != vec2.size()){
         std::cerr << "Vectors not the same size for dot product" << std::endl;
       } else{
         for (int i = 0 ; i < vec1.size() ; i++){
@@ -27,9 +27,9 @@ double math::dot_product(const std::vector<double>& vec1, const std::vector<doub
 double math::ReLU(double raw_input){
       if (raw_input < 0){
         return 0.0;
-      } else (
+      } else {
           return raw_input;
-          )
+      }
 
     }
 
@@ -116,10 +116,10 @@ double math::ReLU(double raw_input){
 
   std::vector<std::vector<double>> init_NN::create_Biases(int input, int first, int second, int third, int output){
     std::vector<std::vector<double> Biases(4);
-    Biases = std::vector<double>(qty_FirstLayer, 1);
-    Biases = std::vector<double>(qty_SecondLayer, 1);
-    Biases = std::vector<double>(qty_ThirdLayer, 1);
-    Biases = std::vector<double>(qty_OutputLayer, 1);
+    Biases[0] = std::vector<double>(qty_FirstLayer, 1);
+    Biases[1] = std::vector<double>(qty_SecondLayer, 1);
+    Biases[2] = std::vector<double>(qty_ThirdLayer, 1);
+    Biases[3] = std::vector<double>(qty_OutputLayer, 1);
   
   return Biases;
   }
@@ -143,6 +143,7 @@ init_NN::init_NN(int input,
             int third, 
             int output)
 // initalizer list
+// want to seed the number generator
   : gen(rd()), distr(0, 5)
 
 
@@ -168,13 +169,6 @@ init_NN::init_NN(int input,
                   << "Each of these represents the amount of neurons in a respective layer" << std::endl;
       }
     
-
-      
-    // seed a random number generator 
-  std::random_device rd;
-  std::mt19937 gen(rd());
-  std::uniform_int_distribution<> distr(0,5);
-
 
     
     // create weights main  
@@ -216,12 +210,24 @@ init_NN::init_NN(){
     }
 
 
+  void ForwardProp::calculateandwrite_ActivationsNextLayer(int index_WriteLayer){
+    for (int i = 0 ; i < this-> NeuronsPtr[index_WriteLayer] ; i++){
+ 
+      // STEPS:
+      //
+      //# current neuron is interchangable with the term ith neuron
+      //
+      // 1) take the dot product between the current neuron's weight vector and the incoming neuron activations 
+      //
+      // 2) add the current neurons bias value to that dot product 
+      //
+      // 3) take the ReLU of that raw activation to obtain the current/ith neurons actual activation value 
+      //
+      // 4) Finally ... write the activation of the current neuron to NeuronsPtr[index_WriteLayer][i]
 
-  void ForwardProp::calculateandwrite_ActivationsNextLayer(int index_CurrentLayer){
 
-    for (int i = 0 ; i < this -> WeightsPtr[index_CurrentLayer].size() ; i++){
-     // populate the neuron in the next layer appropritely
-      this -> NeuronsPtr[i + 1][j] = math::ReLU((math::dot_product(WeightsPtr[i][j], NeuronsPtr[i]));
+      NeuronsPtr[index_WriteLayer][i] = ReLU(dot_product(WeightsPtr[index_WriteLayer - 1][i], NeuronsPtr[index_WriteLayer - 1]) 
+        + BiasesPtr[index_WriteLayer][i]);
     }
   }
 
