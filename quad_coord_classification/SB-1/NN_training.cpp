@@ -19,24 +19,34 @@ Training::Training(){
   std::cerr <<"You are trying to use the default constructor for Training which is not allowed" << std::endl;
 }
 
-void Training::run_BackPropOneTrainingExample(int index_CurrentTrainingExample){
-  
 
-
-}
 
 void Training::run_AllTraining(){
-  for (int i = 0 ;  i < TrainingDataPtr->size() ; i++){
-    run_BackPropOneTrainingExample(i);
-  }
-
+for (int i = 0 ; i < this->TrainingDataPtr->size() ; i++ ){
+  run_BackPropOneTrainingExample(i);
+}
 }
 
-
-void Training::run_BackPropOneLayer(int index_CurrentTrainingExample, int index_NNLayer){
-  // this is where basically all the magic should happen and all the actual writing should happen
+// this function is going to be absolutely massive ... and thats just going to have to be ok
+void Training::run_BackPropOneTrainingExample(int index_CurrentTrainingExample){
+  // for the current training example
   
 
-  // need to collect and store the 
+    // going to need to write out the partial derivatives in here as lambda sudofunctions
+
+    double dL_dW = []()
+
+
+    // going to need to have a way to store each of the partial derivatives
+    // I can just hard code them in right here
+   
+
+
+
+
+    for (int i = 0 ; i < 4 ; i++){
+      // for 4 iterations each representing the set of weights and biases between two layers and their updates
+    }
 
 }
+
