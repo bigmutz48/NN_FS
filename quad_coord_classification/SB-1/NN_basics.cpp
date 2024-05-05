@@ -258,7 +258,7 @@ init_NN::init_NN(){
       } else if (NeuronsPtr == nullptr){
         std::cerr << "Must set NeuronsPtr" << std::endl;
       } else {
-        // if none of those get tripped then you want to run the forward prop 
+// if none of those get tripped then you want to run the forward prop 
         
 
         // loop for the remaining layers which remain unfilled ... only 2,3,4,5 remain unfilled  and therefore are the only ones that 
