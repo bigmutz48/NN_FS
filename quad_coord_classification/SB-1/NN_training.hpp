@@ -33,7 +33,10 @@ class Training{
     std::vector<std::vector<double>>* NeuronsPtr;
     std::vector<std::vector<double>>* BiasesPtr;
     std::vector<coord>* TrainingDataPtr;
-    
+   
+    // partials functions 
+
+
 
 };
 
