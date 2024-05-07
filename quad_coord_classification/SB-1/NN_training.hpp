@@ -13,7 +13,9 @@ class Training{
     Training(std::vector<std::vector<std::vector<double>>>* WeightsPtr,
              std::vector<std::vector<double>>* NeuronsPtr,
              std::vector<std::vector<double>>* BiasesPtr,
-             std::vector<coord>* TrainingDataPtr;
+             std::vector<coord>* TrainingDataPtr,
+             double learning_rate
+             );
 
     ~Training();
 
@@ -33,8 +35,25 @@ class Training{
     std::vector<std::vector<double>>* NeuronsPtr;
     std::vector<std::vector<double>>* BiasesPtr;
     std::vector<coord>* TrainingDataPtr;
+    double learning_rate; 
    
-    // partials functions 
+    class partial{
+      public:
+        
+        // default constructor for this one
+        partial();
+      
+        // partial derivative functions here
+        double dL_da(int index_a, std::vector)
+
+
+
+
+
+
+        // really shouldnt be any private functions for this one
+      private:
+    } 
 
 
 
