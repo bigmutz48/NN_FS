@@ -25,7 +25,7 @@ Training::Training(){
 
 void Training::run_TrainingOneLayer(int layer_index){
 // imagine that you are at the first layer 
-  
+  //
 
   // for each neuron in the current layer 
   for (int i = 0 ; i < NeuronsPtr[layer_index].size() ; i++){
@@ -58,11 +58,18 @@ void Training::run_TrainingOneLayer(int layer_index){
             
             // DERIVATIVE: dA_dZ 
             // this is a lot harder ... going to need to have the z value for the current layer_index at neuron j
-            dA_dZ =  
+            if (ZValuesPtr[layer_index - 1][i] <= 0){
+              dA_dZ = 0; 
+            } else {
+              dA_dZ = 1;
+            } 
 
-            //DERIVATIVE: dZ_dW_ij
+            //DERIVATIVE: dL_dA
             // this one is only moderately loco
-            
+            // this one is the hardest and requires a sum function
+            for (int i = 0 ; i < NeuronsPtr[layer_index].size() ; i++){
+              dL_dA += (NeuronsPtr[layer_index][i])
+            }
 
 
     // calculate the gradient for this weight
@@ -73,7 +80,11 @@ void Training::run_TrainingOneLayer(int layer_index){
         // and then for the ith neuron inside of there
         // and finally for the jth weight
         this-> GradientWeights[layer_index - 1][i][j] = weightgradient;
-    }
+    }// move to next neuron
+  
+// calculate the gradient for the bias of this neuron and write that
+
+
   }
 
 
