@@ -52,13 +52,13 @@ double math::ReLU(double raw_input){
     }
 
 
-   std::vector<std::vector<double>> create_5LayerNetwork(int input, int first, int second, int third, int output){
+   std::vector<std::vector<double>> create_5LayerNetwork(){
     std::vector<std::vector<double>> ret(5);
-    ret[0] = create_OneLayer(input);
-    ret[1] = create_OneLayer(first);
-    ret[2] = create_OneLayer(second);
-    ret[3] = create_OneLayer(third;
-    ret[4] = create_OneLayer(output);
+    ret[0] = create_OneLayer(this->qty_InputLayer);
+    ret[1] = create_OneLayer(this->qty_FirstLayer);
+    ret[2] = create_OneLayer(this->qty_SecondLayer);
+    ret[3] = create_OneLayer(this->qty_ThirdLayer);
+    ret[4] = create_OneLayer(this->qty_OutputLayer);
    
     
     return ret;
@@ -95,35 +95,40 @@ double math::ReLU(double raw_input){
 
     // create one set of weights
 
-  std::vector<std::vector<std::vector<double>>> init_NN::create_WeightsMain(int input, int first, int second, int third, int output){
+  std::vector<std::vector<std::vector<double>>> init_NN::create_WeightsMain(){
     std::vector<std::vector<std::vector<double>>> WeightsMain(4);
     // fill up the layers
     
     // weights matrix between the input and first layer
-    WeightsMain[0] = create_WeighsMatrixOneLayer(input, first);
+    WeightsMain[0] = create_WeighsMatrixOneLayer(this->qty_InputLayer, this->qty_FirstLayer);
     
     // weights matrix between the input and first layer
-    WeightsMain[1] = create_WeighsMatrixOneLayer(first, second);
+    WeightsMain[1] = create_WeighsMatrixOneLayer(this->qty_FirstLayer, this-> qty_SecondLayer);
    
     // weights matrix between the input and first layer
-    WeightsMain[2] = create_WeighsMatrixOneLayer(second, third);
+    WeightsMain[2] = create_WeighsMatrixOneLayer(this->qty_SecondLayer, this->qty_ThirdLayer);
     
     // weights matrix between the input and first layer
-    WeightsMain[3] = create_WeighsMatrixOneLayer(third, output);
+    WeightsMain[3] = create_WeighsMatrixOneLayer(this->qty_ThirdLayer, this->qty_OutputLayer);
   }
   
 
 
-  std::vector<std::vector<double>> init_NN::create_Biases(int input, int first, int second, int third, int output){
+  std::vector<std::vector<double>> init_NN::create_Biases(){
     std::vector<std::vector<double> Biases(4);
-    Biases[0] = std::vector<double>(qty_FirstLayer, 1);
-    Biases[1] = std::vector<double>(qty_SecondLayer, 1);
-    Biases[2] = std::vector<double>(qty_ThirdLayer, 1);
-    Biases[3] = std::vector<double>(qty_OutputLayer, 1);
+    Biases[0] = std::vector<double>(this->qty_FirstLayer, 1);
+    Biases[1] = std::vector<double>(this->qty_SecondLayer, 1);
+    Biases[2] = std::vector<double>(this->qty_ThirdLayer, 1);
+    Biases[3] = std::vector<double>(this->qty_OutputLayer, 1);
   
   return Biases;
   }
 
+
+
+
+    // create the functon that is going to create the zvals storage 
+std::vector<std::vector<double>> create_ZVals_storage();
 
 
     // parameters to be set when the constructor is called
@@ -170,30 +175,15 @@ init_NN::init_NN(int input,
       }
     
 
-    
-    // create weights main  
-    this-> WeightsMain = create_WeightsMain(qty_InputLayer,
-                                                                                   qty_FirstLayer, 
-                                                                                   qty_SecondLayer,
-                                                                                   qty_ThirdLayer,
-                                                                                   qty_OutputLayer)
-    
-    // create biases 
-    this-> BiasesMain = create_Biases(qty_InputLayer,
-                                                                qty_FirstLayer,
-                                                                qty_SecondLayer,
-                                                                qty_ThirdLayer,
-                                                                qty_OutputLayer)
+     // create weights main 
+     this-> WeightsMain = create_WeightsMain();
 
+     // create biases
+     this-> BiasesMain = create_Biases();
 
-
-
-    // create neurons
-    this-> NeuronsMain = create_5LayerNetwork(qty_InputLayer,
-                                                                        qty_FirstLayer,
-                                                                        qty_SecondLayer,
-                                                                        qty_ThirdLayer,
-                                                                        qty_OutputLayer)   
+     //create neurons
+     this-> NeuronsMain = create_5LayerNetwork();
+      
     }
 
 
@@ -209,8 +199,30 @@ init_NN::init_NN(){
       std::cerr << "You cannot use the default constructor for creating an object of this class";
     }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////   VVVV    FORWARD PROP     VVVV   ///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
 
-  void ForwardProp::calculateandwrite_ActivationsNextLayer(int index_WriteLayer){
+std::vector<std::vector<double>> create_ZVals_storage(){
+  std::vector<std::vector<double>> ret(4);
+
+  ret[0] = std::vector<double>(this->NeuronsPtr[1].size() , 0);
+  ret[1] = std::vector<double>(this->NeuronsPtr[2].size() , 0);
+  ret[2] = std::vector<double>(this->NeuronsPtr[3].size() , 0);
+  ret[3] = std::vector<double>(this->NeuronsPtr[4].size() , 0);
+
+
+  return ret;
+}
+
+
+
+
+void ForwardProp::calculateandwrite_ActivationsNextLayer(int index_WriteLayer){
     for (int i = 0 ; i < this-> NeuronsPtr[index_WriteLayer] ; i++){
  
       // STEPS:
@@ -225,11 +237,16 @@ init_NN::init_NN(){
       //
       // 4) Finally ... write the activation of the current neuron to NeuronsPtr[index_WriteLayer][i]
 
-
-      NeuronsPtr[index_WriteLayer][i] = ReLU(dot_product(WeightsPtr[index_WriteLayer - 1][i], NeuronsPtr[index_WriteLayer - 1]) 
-        + BiasesPtr[index_WriteLayer][i]);
+      
+      // put all of this into a value z  and then take the relu of that
+      double z = 0;
+      z = dot_product(WeightsPtr[index_WriteLayer - 1][i], NeuronsPtr[index_WriteLayer - 1]) 
+        + BiasesPtr[index_WriteLayer][i];
+      ZValuesPtr[index_WriteLayer - 1][j];
+      NeuronsPtr[index_WriteLayer][i] = ReLU(z);
     }
-  }
+
+    }
 
 
 //private
@@ -243,12 +260,19 @@ init_NN::init_NN(){
     this->WeightsPtr = WeightsPtr;
     this->BiasesPtr = BiasesPtr;
     this->NeuronsPtr = NeuronsPtr;
+    // set ZValuesPtr equal to the address of create_ZVals_storage()
+    this->ZValuesPtr = &create_ZVals_storage();
 
   }
   // if default constructor is used throw an error
   ForwardProp::ForwardProp(){
     std::cerr << "You cannot use the default constructor for ForwardProp";
   }
+
+
+  // need my function here to create the z value strorage
+
+
 
   void ForwardProp::run_ForwardProp(){
       if (BiasesPtr == nullptr){

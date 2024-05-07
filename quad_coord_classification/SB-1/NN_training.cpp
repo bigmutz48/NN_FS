@@ -8,12 +8,14 @@ Training::Training(std::vector<std::vector<std::vector<double>>>* WeightsPtr,
                    std::vector<std::vector<double>>* NeuronsPtr,
                    std::vector<std::vector<double>>* BiasesPtr,
                    std::vector<coord>* TrainingDataPtr,
+                   std::vector<std::vector<double>>* ZValuesPtr,
                    double LearningRate){
 this-> WeightsPtr = WeightsPtr;
 this-> NeuronsPtr = NeuronsPtr;
 this-> BiasesPtr = BiasesPtr;
 this-> TrainingDataPtr = TrainingDataPtr;
 this-> LearningRate = LearningRate;
+this-> ZValuesPtr = ZValuesPtr;
 }
 
 Training::Training(){
@@ -51,14 +53,21 @@ void Training::run_TrainingOneLayer(int layer_index){
       // going to run the calculations here
 
             // first ... very easy ... dZ_dW_ij is equal to A^(n-1)_j
-
+            // dZ_dW_ij gets the neuron activation from the previous layer at index j
+            dZ_dW_ij = this-> NeuronsPtr[layer_index - 1][j];
             
+            // DERIVATIVE: dA_dZ 
+            // this is a lot harder ... going to need to have the z value for the current layer_index at neuron j
+            dA_dZ =  
 
+            //DERIVATIVE: dZ_dW_ij
+            // this one is only moderately loco
+            
 
 
     // calculate the gradient for this weight
     weightgradient = dL_dA * dA_dZ * dZ_dW_ij;
-
+    
     // actually do the assignment here
         // layer_index - 1 because GradientWeights has only four indexes whereas NeuronsPtr has 5
         // and then for the ith neuron inside of there

@@ -14,6 +14,7 @@ class Training{
              std::vector<std::vector<double>>* NeuronsPtr,
              std::vector<std::vector<double>>* BiasesPtr,
              std::vector<coord>* TrainingDataPtr,
+             std::vector<std::vector<double>>* ZValuesPtr;
              double learning_rate
              );
 
@@ -31,10 +32,11 @@ class Training{
     void run_BackPropOneTrainingExample(int index_CurrentTrainingExample);
 
     // Parameters to be set by the constructor when it is called     
-    std::vector<std::vector<std::vector<double>>>* WeightsPtr;
-    std::vector<std::vector<double>>* NeuronsPtr;
-    std::vector<std::vector<double>>* BiasesPtr;
-    std::vector<coord>* TrainingDataPtr;
+    std::vector<std::vector<std::vector<double>>>* WeightsPtr = nullptr;
+    std::vector<std::vector<double>>* NeuronsPtr = nullptr;
+    std::vector<std::vector<double>>* BiasesPtr = nullptr;
+    std::vector<coord>* TrainingDataPtr = nullptr;
+    std::vector<std::vector<double>>* ZValuesPtr = nullptr;
     double learning_rate; 
    
 

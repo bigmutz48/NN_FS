@@ -55,6 +55,8 @@ class init_NN {
 
 
 
+  std::vector<std::vector<double>> create_ZVal_storage();
+
     // parameters to be set when the constructor is called
 
     int qty_InputLayer;
@@ -112,10 +114,15 @@ class ForwardProp{
   // pointer to the neruons array
   std::vector<std::vector<double>>* NeuronsPtr;
 
+  // pointer to the z values / the raw inputs to the neurons ... this is needed for the calculus that will be done
+  std::vector<std::vector<double>>* ZValuesPtr;
 
 
   void calculateandwrite_ActivationsNextLayer(int index_CurrentLayer);
 
+
+  // create the function that will fill up ZValuesPtr 
+  std::vector<std::vector<double>>* create_ZVal_storage();
 
 //private
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -127,6 +134,8 @@ class ForwardProp{
                std::vector<std::vector<double>>* NeuronsPtr);
   // if default constructor is used throw an error
   ForwardProp();
+
+
 
 
   // main function to be called to run all forward prop
