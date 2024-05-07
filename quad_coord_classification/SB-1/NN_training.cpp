@@ -13,6 +13,7 @@ this-> WeightsPtr = WeightsPtr;
 this-> NeuronsPtr = NeuronsPtr;
 this-> BiasesPtr = BiasesPtr;
 this-> TrainingDataPtr = TrainingDataPtr;
+this-> LearningRate = LearningRate;
 }
 
 Training::Training(){
@@ -20,33 +21,51 @@ Training::Training(){
 }
 
 
-
-void Training::run_AllTraining(){
-for (int i = 0 ; i < this->TrainingDataPtr->size() ; i++ ){
-  run_BackPropOneTrainingExample(i);
-}
-}
-
-// this function is going to be absolutely massive ... and thats just going to have to be ok
-void Training::run_BackPropOneTrainingExample(int index_CurrentTrainingExample){
-  // for the current training example
+void Training::run_TrainingOneLayer(int layer_index){
+// imagine that you are at the first layer 
   
 
-    // going to need to write out the partial derivatives in here as lambda sudofunctions
-
-    double dL_dW = []()
-
-
-    // going to need to have a way to store each of the partial derivatives
-    // I can just hard code them in right here
-   
-
+  // for each neuron in the current layer 
+  for (int i = 0 ; i < NeuronsPtr[layer_index].size() ; i++){
+    // for each weight for this specific neuron
+    for (int j = 0 ; j < NeuronsPtr[layer_index - 1].size() ; j++){
+      
+      //create a temporary variable to store the value of the gradient of the cost function with respect to this weight
+      double weightgradient = 0;
 
 
 
-    for (int i = 0 ; i < 4 ; i++){
-      // for 4 iterations each representing the set of weights and biases between two layers and their updates
+      //3 things to calculate!
+      //1) dL_dA -> the derivative of the loss with respect to the activation
+      //2) dA_dZ -> the derivative of the activation with respect to the raw input
+      //3) dZ_dW_ij -> the derivative of the raw input with respect to the specific weight we are looking at
+
+      // set these values up so we can fill them up
+      double dL_dA = 0;
+      double dA_dZ = 0;
+      double dZ_dW_ij = 0;
+
+
+
+
+      // going to run the calculations here
+
+            // first ... very easy ... dZ_dW_ij is equal to A^(n-1)_j
+
+            
+
+
+
+    // calculate the gradient for this weight
+    weightgradient = dL_dA * dA_dZ * dZ_dW_ij;
+
+    // actually do the assignment here
+        // layer_index - 1 because GradientWeights has only four indexes whereas NeuronsPtr has 5
+        // and then for the ith neuron inside of there
+        // and finally for the jth weight
+        this-> GradientWeights[layer_index - 1][i][j] = weightgradient;
     }
+  }
+
 
 }
-

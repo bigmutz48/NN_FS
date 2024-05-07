@@ -37,23 +37,37 @@ class Training{
     std::vector<coord>* TrainingDataPtr;
     double learning_rate; 
    
-    class partial{
-      public:
-        
-        // default constructor for this one
-        partial();
+
+   // create the location to store the gradient of the network
+      // create the function to generate it properly
+      std::vector<std::vector<std::vector<double>>> create_GradientWeights();
+    
+      // function to create biases gradient 
+      std::vector<std::vector<double>> create_GradientBiases();
       
-        // partial derivative functions here
+
+      // actual vectors to access
+      auto GradientWeights = create_GradientWeights();
+
+      auto GradientBiases = create_GradientBiases();
+
+
+   // partial derivative functions here
         double dL_da(int index_a, std::vector)
+        
+        double da_dz();
 
+        double dz_dw();
 
+        double dz_db();
 
+   // functions to actually run training
+        // Function takes only the index of the layer it is currently operating on
+        // go through each neuron and populate the gradients of the weights and biases appropriately
+        void run_TrainingOneLayer(int index);
 
-
-
-        // really shouldnt be any private functions for this one
-      private:
-    } 
+        // FUNCTION: run run_TrainingOneLayer 4 times 
+        void run_TrainingEachLayer();
 
 
 
