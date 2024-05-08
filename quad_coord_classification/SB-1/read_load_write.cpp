@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <vector>
 
 class ReadWrite{
   
@@ -74,4 +75,4 @@ void write_Biases(const std::string& filename, const std::vector<std::vector<dou
 
   
 
-  }
+  };

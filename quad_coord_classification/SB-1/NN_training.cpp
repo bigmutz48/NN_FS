@@ -2,7 +2,7 @@
 #include <vector>
 #include "NN_basics.hpp"
 #include "NN_training.hpp"
-#include "NN_data_gen"
+#include "NN_data_gen.hpp"
 
 Training::Training(std::vector<std::vector<std::vector<double>>>* WeightsPtr,
                    std::vector<std::vector<double>>* NeuronsPtr,

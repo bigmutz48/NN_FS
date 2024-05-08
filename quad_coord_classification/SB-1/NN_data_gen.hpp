@@ -5,7 +5,7 @@
 
 struct coord{
   int x;
-  int y
+  int y;
 }
 
 class DataGen{

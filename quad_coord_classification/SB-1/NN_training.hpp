@@ -1,5 +1,5 @@
 #ifndef NN_TRAINING_HPP
-#define 
+#define NN_TRAINING_HPP 
 #include <vector>
 #include <iostream>
 #include "NN_data_gen.hpp"
