@@ -6,7 +6,7 @@
 struct coord{
   int x;
   int y;
-}
+};
 
 class DataGen{
   public:
@@ -24,6 +24,6 @@ class DataGen{
 
     int quadratic(int x);
 
-}
+};
 
 #endif

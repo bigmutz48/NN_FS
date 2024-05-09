@@ -14,9 +14,11 @@ class Training{
              std::vector<std::vector<double>>* NeuronsPtr,
              std::vector<std::vector<double>>* BiasesPtr,
              std::vector<coord>* TrainingDataPtr,
-             std::vector<std::vector<double>>* ZValuesPtr;
+             std::vector<std::vector<double>>* ZValuesPtr,
              double learning_rate
              );
+
+     Training();
 
     ~Training();
 
@@ -25,11 +27,8 @@ class Training{
 
     
   private:
-    double CostFunction(double )
-    void run_BackPropOneLayer(int index_CurrentTrainingExample, int index_NNLayer)
 
-    // this function should get called for each training example and bias update
-    void run_BackPropOneTrainingExample(int index_CurrentTrainingExample);
+//////////////// PARAMETERS ///////////////////////////////////////////////////////////////////////////////////
 
     // Parameters to be set by the constructor when it is called     
     std::vector<std::vector<std::vector<double>>>* WeightsPtr = nullptr;
@@ -37,8 +36,16 @@ class Training{
     std::vector<std::vector<double>>* BiasesPtr = nullptr;
     std::vector<coord>* TrainingDataPtr = nullptr;
     std::vector<std::vector<double>>* ZValuesPtr = nullptr;
-    double learning_rate; 
-   
+    double LearningRate;
+
+    // other shared parameters
+    int TrainingIndexCtr = 0;   
+
+
+////// END PARAMETERS /////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////// FUNCTIONS ////////////////////////////////////////////////////////////////////////////////
+
 
    // create the location to store the gradient of the network
       // create the function to generate it properly
@@ -49,30 +56,22 @@ class Training{
       
 
       // actual vectors to access
-      auto GradientWeights = create_GradientWeights();
+      std::vector<std::vector<std::vector<double>>> GradientWeights = create_GradientWeights();
 
-      auto GradientBiases = create_GradientBiases();
+      std::vector<std::vector<double>> GradientBiases = create_GradientBiases();
 
-
-   // partial derivative functions here
-        double dL_da(int index_a, std::vector)
-        
-        double da_dz();
-
-        double dz_dw();
-
-        double dz_db();
 
    // functions to actually run training
         // Function takes only the index of the layer it is currently operating on
         // go through each neuron and populate the gradients of the weights and biases appropriately
-        void run_TrainingOneLayer(int index);
+        void run_TrainingOneLayer(int layer_index);
 
-        // FUNCTION: run run_TrainingOneLayer 4 times 
-        void run_TrainingEachLayer();
+    //FUNCTION:run training one layer 4 times for a given training example
+    //
+    //-> the index of the current training example is kept in a parameter that belongs to this object
+    void run_BackPropOneTrainingExample();
 
-
-
+//////////////////// END FUNCTIONS ////////////////////////////////////////////////////////////////////////////////
 };
 
 
