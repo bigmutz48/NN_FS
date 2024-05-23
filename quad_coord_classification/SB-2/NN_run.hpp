@@ -25,6 +25,7 @@ class NN_RUN{
     populate_metadata_from_file(metadata_file_name);
 
 
+  // functions for forward prop
 
 
 
