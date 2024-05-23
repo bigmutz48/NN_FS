@@ -1,9 +1,7 @@
 #ifndef NN_INIT_HPP
 #define NN_INIT_HPP
-
-
-
-
+#include <vector>
+#include <iostream>
 
 // This class is only for initializng a blank neural net with no parameters
 
@@ -37,54 +35,11 @@ struct NN{
   std::vector<neuron>* output_layer_neurons = nullptr
 
   // gradient and backprop info
-};
 
-
-class NN_INIT{
-  // initialization parameters
-    int qty_input;
-    int qty_first;
-    int qty_second;
-    int qty_third;
-    int qty_output;
-
-
-
-
-  // functions to initialize a new network
-    void initialize_weights(NN network_to_init);
-    void initialize_biases(NN network_to_init);
-
-
-
-
-  //create the NN object
-    NN my_NN;
-
-  // set the object up
-  initialize_weights(my_NN);
-  initialize_biases(my_NN);
-  
-
-
-
-  public:
-    // user should only be able to do a few things with this class
-
-    // constructor for this class 
-    NN_INIT(
-        int qty_input,
-        int qty_first,
-        int qty_second,
-        int qty_third,
-        int qty_output
-        );
-    ~NN_INIT();
-    
-    NN get_NN();
-
-
+  // initialize the weights and biases with random values ***
 
 };
+
+
 
 #endif
