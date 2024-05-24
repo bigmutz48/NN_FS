@@ -3,7 +3,7 @@
 #include <vector>
 #include <optional>
 #include <memory>
-
+#include "my_math.hpp"
 
 
 /****************************************************************************************************
@@ -63,11 +63,21 @@ class NN {
       void populate_biases_from_file();
       void populate_metadata_from_file();
 
-      void populate_biases();
-      void populate_weights();
+      void populate_random_biases();
+      void populate_random_weights();
 
 
-      //////// forward prop methods 
+      //////// forward prop methods
+      /// -> the main function is public so you will see it later
+      
+
+      /////// save to file methods 
+      
+      // for writing to previously existing files if load == true 
+      void write_weights_and_biases_existing_files();
+
+      // for making a new file if this is a new network if load  == false 
+      void write_weights_and_biases_new_file();
 
       
       ////////////////////////// END NETWORK METHODS ///////////////////////////////
@@ -90,12 +100,25 @@ class NN {
  
 
   public:
+    // getters/setters
+    void get_input_layer();
+    void get_first_layer();
+    void get_second_layer();
+    void get_third_layer();
+    void get_output_layer();
+
+    // throw an error if this gets called    
+    NN();
+
+    // non default constructor this is what should be used
     NN(int input, int first, int second, int third, int output,
        bool load_from_file, std::string weights_file_name, std::string biases_file_name, std::string metadata_file_name);
     ~NN();
 
     // return the output of the network
     double run_forward_prop(int x, int y);
+
+    void save_to_files();
 };
 
 
