@@ -19,3 +19,21 @@ my_training_data(my_training_data){
 }
 
 ~NN_training::NN_training(){}
+
+
+
+// should take no parameters .... uses this->
+void NN_training::calculate_partials_for_current_training_example(){
+
+}
+
+
+void NN_training::run_training_next_example(){
+
+}
+
+void NN_training::run_all_training(){
+  do {
+    NN_training::run_training_next_example();
+  } while (this->training_example_ctr < my_training_data.get_num_training_examples());
+}
