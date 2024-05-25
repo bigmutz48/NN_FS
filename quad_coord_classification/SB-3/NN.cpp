@@ -157,11 +157,13 @@ void NN::populate_metadata_from_file(){
           std::cerr << "failed to open the metadata file!" << std::endl;
         }
 
-        metadata >> qty_input;
-        metadata >> qty_first;
-        metadata >> qty_second;
-        metadata >> qty_third;
-        metadata >> qty_output;
+        metadata >> this->qty_input;
+        metadata >> this->qty_first;
+        metadata >> this->qty_second;
+        metadata >> this->qty_third;
+        metadata >> this->qty_output;
+        metadata >> this->num_examples_trained_on;
+          
 
 
 
