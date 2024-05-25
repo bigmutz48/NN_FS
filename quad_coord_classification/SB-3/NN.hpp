@@ -4,6 +4,7 @@
 #include <optional>
 #include <memory>
 #include "my_math.hpp"
+#include <fstream>
 
 
 /****************************************************************************************************
@@ -42,7 +43,7 @@ class NN {
       int qty_third;
       int qty_output;
       bool load_from_file = false;
-      int num_training_examples;
+      int num_examples_trained_on;
       std::string weights_file_name;
       std::string biases_file_name;
       std::string metadata_file_name;
@@ -59,10 +60,10 @@ class NN {
       
 
       ///////// set up 
+      void populate_metadata_from_file();
       void populate_weights_from_file();
       void populate_biases_from_file();
-      void populate_metadata_from_file();
-
+      
       void populate_random_biases();
       void populate_random_weights();
 
@@ -77,7 +78,7 @@ class NN {
       void write_weights_and_biases_existing_files();
 
       // for making a new file if this is a new network if load  == false 
-      void write_weights_and_biases_new_file();
+      void write_weights_and_biases_new_files();
 
       
       ////////////////////////// END NETWORK METHODS ///////////////////////////////
