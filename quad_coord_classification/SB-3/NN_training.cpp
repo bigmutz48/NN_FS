@@ -24,7 +24,11 @@ my_training_data(my_training_data){
 
 // should take no parameters .... uses this->
 void NN_training::calculate_partials_for_current_training_example(){
+    // look at the output
+    for (int i = 0 ; i < this->NN_to_train.get_output_layer().size() ; i++)[
+      // each neuron
 
+    ]
 }
 
 
