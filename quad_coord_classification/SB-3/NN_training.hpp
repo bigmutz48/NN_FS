@@ -16,8 +16,9 @@ PURPOSE: run training on an already existing network using already existing trai
 
 
 struct neuron_partials{
-    // main partials 
 
+  // main partials 
+      
       // partial between this neurons a and this neurons z
       double dai_dzi;
       // partial between cost and this a 
@@ -32,7 +33,7 @@ struct neuron_partials{
       double dzi_dbi = 1;
 
       // partial beteen this z (layer n) and the a from the previous layer (layer n - 1)
-      double dzi_dai_nminus1;
+      std::vector<double> dzi_daj_nminus1_vec;
 
 
 };
@@ -45,7 +46,7 @@ class NN_training{
 
   ////////////////////////////////// METADATA ///////////////////////////////////////////////////////////////
   
-  //initialized to 1 for indexing starting at 1
+
   int training_example_ctr = 1;
   double cost;
   
