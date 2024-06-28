@@ -1,0 +1,18 @@
+PROJECT GOALS:
+
+
+
+
+GOALS: (what our project should do)
+1) Make a program that classifies coordinates as either a correct solution to solve the networks equation
+2) graph all of the coordinates that the program classifies as correct
+
+
+
+
+
+
+
+RULES: (rules for how we can build it)
+1) No external packages related to AI (no pytorch no tensorflow)
+2) Languages: C, C++, Python
