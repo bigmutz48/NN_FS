@@ -5,7 +5,8 @@ PROJECT GOALS:
 
 GOALS: (what our project should do)
 1) Make a program that classifies coordinates as either a correct solution to solve the networks equation
-2) graph all of the coordinates that the program classifies as correct
+2) Make extensive use of CUDA libraries and do as much of the compute on the GPU as possible
+3) graph all of the coordinates that the program classifies as correct
 
 
 
