@@ -18,27 +18,7 @@
 #include <vector>
 #include <iostream>
 #include <memory>
-
-
-/*
- *	COORD OBJECT:
- *this coordinate object has an x and y pair, and then a boolean that declares
- * whether or not this coord object is a valid solution to the equation.
- *
- *
- *
- *
- *
- *
- * */
-
-struct coord{
-	double x = 0 ;
-	double y = 0 ;
-	bool valid = false;
-};
-
-
+#include "data.hpp"
 
 
 
@@ -60,11 +40,32 @@ struct coord{
 
 
 class NN{
-// network parameters
+///////////////////////// NETWORK METADATA ////////////////////////////////
+
+// generic metadata
+	int num_forward_pass = 0;
+	int backprop_pass = 0;
+
+
+// network training metadata 
+	std::string equation;
+	int num_training_examples = 0;
+	
+
+
+
+// network structure parameters
 int qty_hidden_layer_density;
 int qty_hidden_layer;
 int qty_inputs;
 int qty_outputs;
+
+
+
+//////////////////////////  NETWORK STRUCTURE ////////////////////////////////
+
+
+
 
 // actiavtions
 std::vector<std::vector<double>> NN_activations;
@@ -82,20 +83,22 @@ std::vector<std::vector<double>> NN_biases;
 
 
 
-
+///////////////////////////////// PUBLIC METHODS ////////////////////////////////////////
 	public:
-// methods to operate on the network itself
+
 	
 	// constructor
 	NN(int qty_inputs, int qty_outputs, int qty_hidden_layer_density, int qty_hidden_layer);
 	~NN();
 
 
-	//takes in one coord and does a forward prop on it
+	//takes in one coord and does a forward prop on it and returns
+	//whether or not the coordinate is a valid solution to EQUATION
 	bool run_forward_prop(coord my_coord);
 
-	
 
+	void run_training_on_data(DATA my_data);	
+		
 
 };
 
