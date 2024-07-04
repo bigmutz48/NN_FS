@@ -94,7 +94,7 @@ bool NN::run_forward_prop(coord my_coord){
 }
 
 
-void NN::run_training_on_data(DATA my_data){
+void NN::run_training_on_data(data my_data){
 	// make the infrastructure to hold gradient and derivative values
 	std::vector<std::vector<double>> NN_gradients(this->qty_hidden_layer + 1, 0.0);
 
@@ -130,3 +130,34 @@ void NN::run_training_on_data(DATA my_data){
 
 
 	void run_training_one_example(coord my_coord);
+
+
+
+// load from folder constructor
+NN::NN(std::string folder){
+
+	// locate folder named FOLDER and open it
+	// -> load values from NN_biases.txt to this->NN_biases
+	// -> load values from NN_weights.txt to this->NN_weights
+	// -> load metadata from metadata.txt to this objects metadata whatever ...
+
+
+}
+
+
+
+
+
+
+// function to save all weights biases and metadata to a folder
+void NN::save_to_folder(std::string folder){
+
+
+	// create a new folder or locate the existing folder with name FOLDER
+	//	-> create or open a file called metadata.txt
+	//		- should have metadata like equation trained on, num training examples, num forward etc.
+	//		- write or overwrite current metadata
+	//	-> either create or open NN_weights.txt and NN_biases.txt and overwrite or write the current 
+	//	weight and bias values to those text files
+	//		- write or overwrite current NN_biases and current NN_weights
+}

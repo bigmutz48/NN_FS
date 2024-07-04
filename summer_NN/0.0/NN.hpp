@@ -19,7 +19,7 @@
 #include <iostream>
 #include <memory>
 #include "data.hpp"
-
+#include "coord.hpp"
 
 
 /*
@@ -91,15 +91,19 @@ std::vector<std::vector<double>> NN_biases;
 	NN(int qty_inputs, int qty_outputs, int qty_hidden_layer_density, int qty_hidden_layer);
 	~NN();
 
+	
+	// load from folder constructor
+	NN(std::string folder);
 
 	//takes in one coord and does a forward prop on it and returns
 	//whether or not the coordinate is a valid solution to EQUATION
 	bool run_forward_prop(coord my_coord);
 
-
-	void run_training_on_data(DATA my_data);	
-		
-
+	// how to run training on a data set
+	void run_training_on_data(data my_data);	
+	
+	// function to save all weights biases and metadata to a folder
+	void save_to_folder(std::string folder);
 };
 
 

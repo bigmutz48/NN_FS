@@ -26,7 +26,7 @@
 
 
 
-class DATA{
+class data{
 	
 	public:
 
@@ -39,14 +39,14 @@ class DATA{
 	const int dim;
 	const std::string equation;
 	const int num_data_points;
-	const float correctness;
+	const double correctness;
 
 
 	const std::vector<coord> test_data;
 
 		// CORRECTNESS refers to the percentage of coordinates in the data set that should solve
 		// the EQUATION
-		DATA(int dim, std::string equation, int num_data_points, float correctness,
+		DATA(int dim, std::string equation, int num_data_points, double correctness,
 		
 				/* optional arguments*/
 				bool training = false
