@@ -1,6 +1,10 @@
 #include "NN.hpp"
+#include <cmath>
+#include <filesystem>
+#include <fstream>
 
-	
+
+
 NN(int qty_inputs, int qty_hidden_layer_density, int qty_hidden_layer);
 	: this->qty_inputs(qty_inputs), this->qty_hidden_layer(qty_hidden_layer),
 	this->qty_hidden_layer_density(qty_hidden_layer_density) 
@@ -73,7 +77,7 @@ NN::~NN(){}
 
 
 
-bool NN::run_forward_prop(coord my_coord){
+double NN::run_forward_prop(coord my_coord){
 	// from input through all hidden layers
 	for ( int i = 0 ; i < this->qty_hidden_layer ; i++){
 		// for each nueron in this layer 
@@ -92,6 +96,7 @@ bool NN::run_forward_prop(coord my_coord){
 	= math.ReLU(math.dot_product(NN_activations[qty_hidden_layer], NN_weights[qty_hidden_layer]) + NN_biases[qty_hidden_layer]);
 	}
 
+	return NN_activations[qty_hidden_layer + 1][0];
 }
 
 
@@ -107,7 +112,7 @@ void NN::run_training_on_data(data my_data){
 	
 	coord my_coord = my_data.test_data[i];
 	// run the forward prop
-	NN::run_forward_prop(my_coord);
+	double network_guess = NN::run_forward_prop(my_coord);
 
 
 		// for each layer in the network that has weights and biases
@@ -119,19 +124,24 @@ void NN::run_training_on_data(data my_data){
 			for (int k = 0 ; k < this->NN_activations[i + 1].size() ; k++){
 			
 			// set the cost with respect the activation 
-			NN_gradients[i][j].coord_map["dc_da"] = 
+			NN_gradients[i][j].coord_map["dc_da"] = std::abs(network_guess - static_cast<double>(my_coord.valid));
 
 			// set the activation with respect to the raw input 
-			NN_gradients[i][j].coord_map["da_dz"] = 
+			
+				if (NN_activations[i+1][j] == 0){
+				NN_gradients[i][j].coord_map["da_dz"] = 0;
+				} else{
+				NN_gradients[i][j].coord_map["da_dz"] = 1;
+				}
 
 			// partial of z with respect to this neurons bias
-			NN_gradients[i][j].coord_map["dz_db"] = 
+			NN_gradients[i][j].coord_map["dz_db"] = 1; 
 
 
 			// do this for all weights that are associated with this neuron
 				for (int f = 0 ; f < this->NN_activations[i] ; f++){
 
-				NN_gradients[i][j].coord_map["dz_dw" + std::to_string(f)] = 
+				NN_gradients[i][j].coord_vector[f] = NN_activations[i][f]; 
 
 				}
 
@@ -222,6 +232,15 @@ void NN::run_training_on_data(data my_data){
 
 
 
+			
+			// do this for all weights that are associated with this neuron
+				for (int f = 0 ; f < this->NN_activations[i] ; f++){
+
+				NN_gradients[i][j].coord_vector[f] = NN_activations[i][f]; 
+
+				}
+
+
 			}// end current training coord loop
 
 		
@@ -251,6 +270,52 @@ NN::NN(std::string folder){
 	// -> load values from NN_weights.txt to this->NN_weights
 	// -> load metadata from metadata.txt to this objects metadata whatever ...
 
+// look for the folder first 
+	try{
+		if(std::filesystem::exists(folder)){
+			if (std::filesystem::is_directory(folder)){
+				std::cout << "folder " << folder << "  exists"  std::endl;
+				return true;
+			}
+	
+	} catch (const std::filesystem_error& e){
+		std::cerr << "Filesystem error: " << e.what() << std::endl;
+		return false;
+	} // end try-catch
+
+// look inside that folder to make sure that everything exists
+
+std::filesystem::path folder(folder);
+
+std::filesystem::path biases = folder / "biases.txt";
+
+std::filesystem::path weights = folder / "weights.txt";
+
+std::filesystem::path metadata = folder / "metadata.txt";
+
+bool bias = false;
+bool weights = false;
+bool metadata = false;
+
+
+// check to see if the files exist in the folder 
+if(std::filesystem::exists(biases)){
+	bias = true;
+	std::cout << "bias file exists" << std::endl;
+}
+if(std::filesystem::exists(weights)){
+	weights = true;
+	std::cout << "weights file exists" << std::endl;
+	
+	} 
+
+if(std::filesystem::exists(metadata)){
+	metadata = true;
+	std::cout << "metadata file exists" << std::endl;
+
+}
+
+
 
 }
 
@@ -270,4 +335,100 @@ void NN::save_to_folder(std::string folder){
 	//	-> either create or open NN_weights.txt and NN_biases.txt and overwrite or write the current 
 	//	weight and bias values to those text files
 	//		- write or overwrite current NN_biases and current NN_weights
+
+
+// look for the folder first and create it if it doesn't exist 
+	try{
+		if(std::filesystem::exists(folder)){
+			if (std::filesystem::is_directory(folder)){
+				std::cout << "writing to folder: " << folder << std::endl;
+				return true;
+
+
+			} else {
+	
+			std::cerr << "folder given exists but is not a directory" << std::endl;
+			return false;
+			
+
+			}
+		} else {
+			if (std::filesystem::create_directory(folder)){
+			std::cout << "Folder created proceding to write to it" << std::endl;
+			} else { std::cerr << "failed to create folder" << std::end;
+			return false;
+			}
+		}
+	
+
+	} catch (const std::filesystem_error& e){
+		std::cerr << "Filesystem error: " << e.what() << std::endl;
+		return false;
+	} // end try-catch
+
+// look inside that folder to make sure that everything exists
+
+std::filesystem::path folder(folder);
+
+std::filesystem::path biases = folder / "biases.txt";
+
+std::filesystem::path weights = folder / "weights.txt";
+
+std::filesystem::path metadata = folder / "metadata.txt";
+
+bool bias = false;
+bool weights = false;
+bool metadata = false;
+
+if(std::filesystem::exists(biases)){
+	bias = true;
+	std::cout << "bias file exists" << std::endl;
+} else {
+	std::ofstream file(biases);	
+	std::cout << "biases file created" << std::endl;
 }
+if(std::filesystem::exists(weights)){
+	weights = true;
+	std::cout << "weights file exists" << std::endl;
+	
+	} else {
+	std::ofstream file(weights);
+	std::cout << "created weights file" << std::endl;
+	}
+
+if(std::filesystem::exists(metadata)){
+	metadata = true;
+	std::cout << "metadata file exists" << std::endl;
+}  else {
+	std::ofstream file(metadata);
+	std::cout << "created metadata file" << std::endl;
+}
+
+//////////////////////////////// check again ///////////////
+
+if(std::filesystem::exists(biases)){
+	bias = true;
+	std::cout << "bias file exists" << std::endl;
+}
+if(std::filesystem::exists(weights)){
+	weights = true;
+	std::cout << "weights file exists" << std::endl;
+	
+	} 
+
+if(std::filesystem::exists(metadata)){
+	metadata = true;
+	std::cout << "metadata file exists" << std::endl;
+} 
+
+// if they all exist then try to write to them
+if(bias && weights && metadata){
+	std::cout << "attempting to write to bias weights and metadata files " << std::endl;
+
+
+
+} // end attempting to write to weights bias and metadata file 
+
+
+} // end function 
+

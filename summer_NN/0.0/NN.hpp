@@ -97,7 +97,7 @@ std::vector<std::vector<double>> NN_biases;
 
 	//takes in one coord and does a forward prop on it and returns
 	//whether or not the coordinate is a valid solution to EQUATION
-	bool run_forward_prop(coord my_coord);
+	double run_forward_prop(coord my_coord);
 
 	// how to run training on a data set
 	void run_training_on_data(data my_data);	

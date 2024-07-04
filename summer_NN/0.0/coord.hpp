@@ -8,9 +8,9 @@
 
 // this coordinate template is made to be able to have any amount of dimensions using the map function
 struct coord{
-		
+	bool valid = false;	
 	std::map<std::string, double> coord_map;
-
+	
 };
 
 /*
