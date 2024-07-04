@@ -1,7 +1,7 @@
 /*
  *  Purpose of this class is to represent a neural net object.
  *
- *
+ *   -> hard coded with one output
  *
  *
  *
@@ -20,8 +20,8 @@
 #include <memory>
 #include "data.hpp"
 #include "coord.hpp"
-
-
+#include "gradient_coord.hpp"
+#include "math.hpp"
 /*
  *
  *	NEURAL NET OBJECT (NN):
@@ -58,8 +58,8 @@ class NN{
 int qty_hidden_layer_density;
 int qty_hidden_layer;
 int qty_inputs;
-int qty_outputs;
-
+//int qty_outputs;
+// -> will have one output
 
 
 //////////////////////////  NETWORK STRUCTURE ////////////////////////////////
@@ -88,7 +88,7 @@ std::vector<std::vector<double>> NN_biases;
 
 	
 	// constructor
-	NN(int qty_inputs, int qty_outputs, int qty_hidden_layer_density, int qty_hidden_layer);
+	NN(int qty_inputs, int qty_hidden_layer_density, int qty_hidden_layer);
 	~NN();
 
 	
