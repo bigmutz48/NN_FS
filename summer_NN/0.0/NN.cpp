@@ -173,7 +173,7 @@ void NN::run_training_on_data(data my_data){
 			 *
 			 *
 			 *
-			 * */
+			 */
 
 			
 
@@ -185,17 +185,30 @@ void NN::run_training_on_data(data my_data){
 
 
 
-			// val_dc_da
+			// val_dc_da for layer i 
 				// loop over all nuerons in the i + 1 layer 
 				for (int z = 0 ; z < NN_activations[i].size() ; z++){
 				val_dc_da += 
 				NN_gradients[i+1][z]["dc_da"] * 
 				NN_gradients[i+1][z]["da_dz"] *
+				NN_weights[i+1][z][j];
 				
-				
-				// tricky -- dz(i+1)/da(i)
-				NN
+				// tricky -- dz(z, i+1)/da(j, i) is equal to NN_weights[i+1][z][j]
+		
+		
 				}
+
+			// val_da_dz
+				// if the z value for the forward pass of this neuron was >0 then val_da_dz
+				// = 1 ... else val_da_dz = 0
+				if (NN_activations[j+1][k] == 0){
+					val_da_dz = 0;
+				} else{
+					val_da_dz = 1;
+				}
+			// val_dz_db
+				val_dz_db = 1;
+
 
 			//////////////////// WRITE PARTIALS ///////////////////////////////
 
