@@ -1,7 +1,0 @@
-RULES FOR VERS 1.0:
- - must be integrated tightly with CUDA
- Programming languages:
-	-> as much of the program as possible must be written in rust
-	-> any files/programs that are written with CUDA must be written with C
-GOALS FOR VERS 1.0:
- - this program family should be designed to run on the HPC cluster 
