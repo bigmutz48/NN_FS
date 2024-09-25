@@ -1,0 +1,5 @@
+PROJECT REQUIREMENTS:
+	- no AI libraries like pytorch
+
+PROJECT GOALS
+	- use cuda and c++ and/or c to make this AI
