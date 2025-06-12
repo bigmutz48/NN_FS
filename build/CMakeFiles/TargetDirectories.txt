@@ -1,3 +1,0 @@
-/home/bignuts/coding_projects/NN_FS/build/CMakeFiles/my_cuda_exe.dir
-/home/bignuts/coding_projects/NN_FS/build/CMakeFiles/edit_cache.dir
-/home/bignuts/coding_projects/NN_FS/build/CMakeFiles/rebuild_cache.dir
