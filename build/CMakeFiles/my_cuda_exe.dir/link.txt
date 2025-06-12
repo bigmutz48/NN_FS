@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/my_cuda_exe.dir/NN.cu.o CMakeFiles/my_cuda_exe.dir/math.cu.o CMakeFiles/my_cuda_exe.dir/testing.cpp.o CMakeFiles/my_cuda_exe.dir/training.cpp.o -o my_cuda_exe   -L/usr/lib/x86_64-linux-gnu/stubs  -L/usr/lib/gcc/x86_64-linux-gnu/12  -lcuda -lcudart -lcudadevrt -lcudart_static -lrt -lpthread -ldl -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc 
