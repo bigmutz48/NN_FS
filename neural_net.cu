@@ -8,7 +8,10 @@ neural_net::neural_net(std::string& folder_name, bool new){
   this->network_folder_name = folder_name;
 
 
+  if(new){
+    
 
+  };
 
 
   int qty_training_examples;
